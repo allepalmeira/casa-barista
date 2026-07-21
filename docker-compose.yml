@@ -1,0 +1,36 @@
+services:
+
+  app:
+    build: .
+    container_name: casa-barista-app
+    working_dir: /var/www
+    volumes:
+      - ./src:/var/www
+
+  nginx:
+    image: nginx:latest
+    container_name: casa-barista-nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+
+  mysql:
+    image: mysql:8.4
+    container_name: casa-barista-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: casa_barista
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
