@@ -1,0 +1,1104 @@
+/*
+=========================
+FONTES GOOGLE E LOCAL
+=========================
+*/
+
+/*GOOGLE */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/*LOCAL */
+@font-face {
+  font-family: "Geometry Soft Pro-Bold N";
+  src: url(../fonts/Geometry-Soft\ Pro-Bold\ N.otf) format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+/*
+======================================
+VARIÁVEIS DA CASA DO BARISTA
+======================================
+*/
+
+:root {
+
+  /* CORES */
+  --cor-fundo-1: #F3E8DC;
+  --cor-fundo-2: #2e2e2e;
+  --cor-primaria: #4b2e1e;
+  --cor-secundaria-1: #8b5e3c;
+  --cor-secundaria-2: #b56a34;
+  --cor-destaque: #5c6945;
+
+  --cor-texto: #2e2e2e;
+  --cor-titulo: #4b2e1e;
+  --cor-subtitulo: #8b5e3c;
+
+
+  /* FONTES */
+  --fonte-texto: "Bebas Neue", sans-serif;
+  --fonte-titulo: "Geometry Soft Pro-Bold N";
+
+}
+
+h2 {
+  font-family: var(--fonte-titulo);
+  font-size: 50px;
+  color: var(--cor-titulo);
+  font-weight: bold;
+}
+
+h3 {
+  font-family: var(--fonte-texto);
+  color: var(--cor-secundaria-1);
+  font-size: 40px;
+}
+
+p {
+  font-family: var(--fonte-texto);
+  color: var(--cor-texto);
+  font-size: 25px;
+}
+
+.site {
+  max-width: 1500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.parallax-padrao {
+  height: 300px;
+  background-image: url(../img/parallax.png);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-padrao::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .5);
+}
+
+.parallax-padrao * {
+  position: relative;
+  z-index: 1;
+}
+
+.parallax-padrao h2 {
+  color: var(--cor-destaque);
+  font-size: 50px;
+  font-family: var(--fonte-titulo);
+  text-transform: uppercase;
+  -webkit-text-stroke: 1px var(--cor-fundo-1);
+  margin-bottom: 70px;
+}
+
+.parallax-padrao h3 {
+  color: var(--cor-destaque);
+  font-size: 40px;
+  font-family: var(--fonte-titulo);
+  -webkit-text-stroke: 1px var(--cor-fundo-1);
+}
+
+/* Estilo padrão de Botão */
+.btn {
+  text-decoration: none;
+  padding: 14px 22px;
+  border-radius: 10px;
+  background-color: var(--cor-primaria);
+  color: var(--cor-fundo-1);
+  display: inline-block;
+  transition: transform .3s ease,
+    box-shadow .3s ease,
+    background-color .3s ease;
+}
+
+.btn:hover {
+  background: var(--cor-secundaria-2);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .5);
+}
+
+/* TOPO */
+.topo {
+  background-color: #0b0b0b;
+}
+
+.topo div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO */
+.topo h1 {
+  width: 180px;
+  height: 92px;
+  background-image: url(../img/logo-casa-do-barista.svg);
+  background-size: cover;
+  margin: 20px;
+  text-indent: -9999px;
+}
+
+/* MENU */
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu ul {
+  display: flex;
+  order: 0;
+}
+
+
+.menu ul li a {
+  font-size: 25px;
+  color: var(--cor-fundo-1);
+  text-decoration: none;
+  margin: 0 20px;
+  font-family: var(--fonte-titulo);
+  font-weight: bold;
+}
+
+.menu ul li a:hover {
+  color: var(--cor-secundaria-2);
+}
+
+.menu-ativo {
+  color: var(--cor-secundaria-2) !important;
+}
+
+
+/*MENU FIXO*/
+.menu-fixo{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: rgba(11, 11, 11, 0.9);
+  animation: menuFixoIn 0.4s ease both;
+}
+
+.menu-fixo.saindo {
+  animation: menuFixoOut 0.35s ease both;
+}
+
+@keyframes menuFixoIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menuFixoOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+/* REDE SOCIAL */
+.redeSocial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.redeSocial li {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cor-primaria);
+  border-radius: 50px;
+
+  /*animar para deixar suave*/
+  transition: transform 0.25s ease,
+    background-color 1s ease,
+    box-shadow 0.25s ease;
+}
+
+.redeSocial li:hover {
+  background-color: var(--cor-secundaria-2);
+  transform: translateY(-3px) scale(1.12);
+  /*box-shadow: X Y Desfoque Cor*/
+  box-shadow: 0 5px 10px var(--cor-secundaria-1);
+}
+
+.menu .redeSocial a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  height: 30px;
+}
+
+.redeSocial img {
+  width: 18px;
+  display: block;
+}
+
+/* LOGIN */
+.login {
+  margin: 0 25px;
+}
+
+.login img {
+  width: 40px;
+  transition: transform 0.25s cubic-bezier(.4, 2.8, .6, 1), filter 0.25s ease;
+}
+
+.login img:hover {
+  transform: translateY(-3px) scale(1.2);
+  filter: brightness(1.2);
+}
+
+/* BANNER */
+.banner img {
+  width: 100%;
+}
+
+.banner .slick-prev:before,
+.banner .slick-next:before {
+  font-size: 60px;
+  color: white;
+}
+
+.banner .slick-prev {
+  left: 40px;
+  z-index: 2;
+}
+
+.banner .slick-next {
+  right: 80px;
+}
+
+
+/* FIM BANNER */
+
+/* BEM - VINDO À CASA DO BARISTA */
+.bem-vindo {
+  padding: 50px 0;
+}
+
+.bem-vindo h2,
+.bem-vindo h3 {
+  text-align: center;
+}
+
+.bem-vindo header p {
+  font-size: 30px;
+  line-height: 40px;
+  text-align: center;
+  width: 800px;
+  margin: 0 auto;
+}
+
+.bem-vindo div div {
+  display: flex;
+  text-align: center;
+  margin-top: 125px;
+  justify-content: space-around;
+}
+
+.bem-vindo article {
+  background-color: #f2f0f1;
+  width: 400px;
+  height: 350px;
+}
+
+.bem-vindo h4 {
+  color: var(--cor-primaria);
+  font-size: 40px;
+  font-family: var(--fonte-texto)
+}
+
+.bem-vindo h5 {
+  font-family: var(--fonte-titulo);
+  color: var(--cor-secundaria-2);
+  font-size: 40px;
+  margin: 25px 0;
+}
+
+.bem-vindo div img {
+  margin: 25px 0;
+  width: 20px;
+}
+
+.bem-vindo div p {
+  color: #2e2e2e;
+  font-size: 25px;
+  padding: 0 10px;
+}
+
+/*DESTAQUE*/
+.destaque .card {
+  display: flex;
+  text-align: center;
+  margin: 50px auto;
+  justify-content: space-around;
+}
+
+.destaque article {
+  background-color: var(--cor-fundo-1);
+  width: 420px;
+  height: 500px;
+}
+
+.destaque h4 {
+  color: var(--cor-primaria);
+  font-size: 30px;
+  font-family: var(--fonte-titulo);
+}
+
+.destaque h5 {
+  color: var(--cor-fundo-2);
+  font-size: 25px;
+  font-family: var(--fonte-texto);
+}
+
+.destaque h5 {
+  font-size: 25px;
+  margin: 25px 0;
+}
+
+.destaque div img {
+  margin: 25px 0;
+}
+
+.destaque div p {
+  color: #fff;
+  font-size: 20px;
+  padding: 0 10px;
+}
+
+/*CARDÁPIO*/
+.cardapio .card-cardapio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.card-flip {
+  width: 480px;
+  height: 240px;
+  perspective: 1000px;
+}
+
+.card-flip-miolo {
+  width: 100%;
+  /* 480 */
+  height: 100%;
+  /* 240 */
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .8s ease;
+  border-radius: 25px;
+}
+
+.card-flip:hover .card-flip-miolo {
+  transform: rotateY(180deg);
+}
+
+.flip1,
+.flip2 {
+  position: absolute;
+  inset: 0;
+  border-radius: 25px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  padding: 22px;
+}
+
+.flip1 {
+  background-image: url(../img/cardapio.png);
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+}
+
+.flip1::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(11, 11, 11, .50);
+}
+
+.flip1 h4 {
+  color: var(--cor-destaque);
+  font-size: 30px;
+  font-family: var(--fonte-titulo);
+  -webkit-text-stroke: 1px var(--cor-fundo-1);
+  position: relative;
+  z-index: 1;
+}
+
+.flip2 {
+  background-color: var(--cor-fundo-1);
+  transform: rotateY(180deg);
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.flip2 h4 {
+  color: var(--cor-primaria);
+  font-size: 30px;
+  font-family: var(--fonte-titulo);
+}
+
+.flip2 span {
+  margin-left: 50px;
+}
+
+.flip2 h5 {
+  font-family: var(--fonte-texto);
+  color: var(--cor-texto);
+  font-size: 25px;
+}
+
+
+.btn-cardapio {
+  display: flex;
+  justify-content: end;
+  padding: 40px;
+}
+
+
+
+/*EQUIPE*/
+.equipe {
+  padding: 50px 0;
+}
+
+.cardEquipe {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.equipe article {
+  margin-top: 50px;
+  background-color: var(--cor-fundo-1);
+  width: 330px;
+  height: 360px;
+}
+
+.equipe h4 {
+  color: var(--cor-primaria);
+  font-size: 30px;
+  margin: 20px 0;
+  font-family: var(--fonte-titulo);
+}
+
+.equipe h5 {
+  color: var(--cor-fundo-2);
+  font-size: 25px;
+  font-family: var(--fonte-texto);
+}
+
+
+/*EVENTOS*/
+.eventos {
+  margin: 50px 0;
+}
+
+.eventos .cardEventos {
+  margin-top: 50px;
+}
+
+.eventos .cardEventos article {
+  background-color: var(--cor-fundo-1);
+  width: 320px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  margin: 15px;
+}
+
+.eventos .cardEventos img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+.eventos .cardEventos h4 {
+  color: var(--cor-secundaria-1);
+  font-size: 25px;
+  font-family: var(--fonte-texto);
+  margin: 20px;
+}
+
+.eventos .cardEventos h5 {
+  font-size: 30px;
+  font-family: var(--fonte-titulo);
+  color: var(--cor-primaria);
+  margin: 0 0 15px 20px;
+}
+
+.eventos .cardEventos nav h5 {
+  font-family: var(--fonte-texto);
+  font-size: 19px;
+  color: var(--cor-texto);
+}
+
+.eventos .cardEventos nav ul li {
+  font-family: var(--fonte-texto);
+  font-size: 19px;
+  margin-left: 40px;
+  line-height: 22px;
+  color: var(--cor-texto);
+  list-style: circle;
+}
+
+.eventos .linha-grao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px;
+}
+
+.eventos .linha-grao hr {
+  flex: 1;
+  border: none;
+  height: 4px;
+  background-color: var(--cor-fundo-2);
+  opacity: .8;
+}
+
+.eventos .linha-grao img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.data {
+  display: block;
+  text-align: center;
+  font-family: var(--fonte-titulo);
+  font-size: 20px;
+  color: var(--cor-titulo);
+  letter-spacing: 4px;
+  padding-bottom: 20px;
+}
+
+.eventos .slick-prev:before,
+.eventos .slick-next:before {
+  font-size: 60px;
+  color: var(--cor-primaria);
+}
+
+.eventos .slick-prev {
+  left: -60px;
+  z-index: 2;
+}
+
+.eventos .slick-next {
+  right: -25px;
+}
+
+
+
+/*GALERIA*/
+.itensGaleria {
+  padding: 50px 0;
+}
+
+.itensGaleria img {
+  margin: 0 10px;
+}
+
+
+/*DEPOIMENTO*/
+.itensDepo .estrela {
+  padding: 50px 0;
+}
+
+.itensDepo .estrela ul {
+  display: flex;
+  justify-content: center;
+}
+
+.itensDepo .estrela ul li {
+  margin: 0 5px;
+}
+
+.itensDepo .estrela ul li img {
+  margin: 0 5px;
+  width: 20px;
+}
+
+.itensDepo .slick-prev:before,
+.itensDepo .slick-next:before {
+  font-size: 60px;
+  color: var(--cor-primaria);
+}
+
+.itensDepo .slick-prev {
+  left: -60px;
+  z-index: 2;
+}
+
+.itensDepo .slick-next {
+  right: -25px;
+}
+
+.dadosDepo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dadosDepo p {
+  width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 25px;
+  font-family: var(--fonte-texto);
+  color: var(--cor-texto);
+
+}
+
+.dadosDepo img {
+  width: 120px;
+  border-radius: 100px;
+}
+
+.dadosDepo h4 {
+  margin-bottom: 50px;
+  margin-top: 20px;
+  font-size: 30px;
+  font-family: var(--fonte-titulo);
+  color: var(--cor-primaria);
+}
+
+.dadosDepo div {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.dadosDepo h5 {
+  font-family: var(--fonte-texto);
+  color: var(--cor-texto);
+
+  margin-bottom: 50px;
+  font-size: 25px;
+}
+
+
+/*####################*/
+/*      RODAPE        */
+/*####################*/
+
+
+.rodape {
+  background-color: var(--cor-fundo-2);
+  margin-top: 80px;
+}
+
+.rodape .rodape-grid {
+  display: flex;
+  justify-content: space-around;
+  gap: 40px;
+  align-items: center;
+  text-align: center;
+}
+
+.rodape h3 {
+  font-family: var(--fonte-titulo);
+  font-size: 30px;
+  color: var(--cor-fundo-1);
+  margin-bottom: 15px;
+}
+
+.rodape .coluna-end address,
+.rodape .link-contato {
+  font-family: var(--fonte-texto);
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--cor-fundo-1);
+  display: block;
+  text-decoration: none;
+}
+
+.rodape .link-contato:hover {
+  color: var(--cor-secundaria-2);
+}
+
+.rodape .coluna-end a {
+  font-family: var(--fonte-titulo);
+  font-size: 25px;
+  text-decoration: none;
+  color: var(--cor-secundaria-2);
+  margin-top: 25px;
+  display: block;
+}
+
+.rodape .coluna-end a:hover {
+  color: var(--cor-fundo-1);
+}
+
+
+/* CARD CENTAL - class=coluna-reserva */
+
+.box-reserva {
+  background-color: var(--cor-primaria);
+  border-radius: 50px 50px 30px 30px;
+  padding: 50px;
+  text-align: center;
+  position: relative;
+  top: -50px;
+  width: 450px;
+}
+
+.linha-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+}
+
+.linha-box hr {
+  width: 150px;
+  height: 2px;
+  border: none;
+  background-color: var(--cor-fundo-1);
+}
+
+.linha-box img {
+  width: 30px;
+  height: 30px;
+}
+
+.box-reserva ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.box-reserva ul li {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--fonte-texto);
+  font-size: 20px;
+  color: var(--cor-fundo-1);
+}
+
+.box-reserva a {
+  background-color: var(--cor-secundaria-2);
+}
+
+.coluna-contato .redeSocial {
+  margin-top: 20px;
+  gap: 30px;
+}
+
+/* NEWSLETTER */
+.box-email {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box-email p {
+  color: var(--cor-fundo-1);
+  font-size: 16px;
+  margin-top: -34px;
+  margin-bottom: 15px;
+}
+
+.box-email form {
+  width: 420px;
+  display: flex;
+  align-items: center;
+  background-color: var(--cor-fundo-1);
+  border-radius: 5px;
+}
+
+.box-email form label {
+  padding: 12px;
+  font-family: var(--fonte-texto);
+  font-size: 20px;
+  color: var(--cor-primaria);
+}
+
+.box-email form input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px 12px;
+  font-family: var(--fonte-texto);
+  font-size: 20px;
+  color: var(--cor-texto);
+}
+
+.box-email form button {
+  width: 44px;
+  height: 100%;
+  border: none;
+  background-color: var(--cor-fundo-1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color .25s ease;
+}
+
+.box-email form button:hover {
+  background-color: var(--cor-secundaria-2);
+}
+
+.box-email form button img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.barra-final {
+  background-color: var(--cor-primaria);
+  padding: 14px 0;
+  text-align: center;
+}
+
+.barra-final p {
+  font-family: var(--fonte-texto);
+  color: var(--cor-fundo-1);
+  font-size: 20px;
+}
+
+
+
+/****************************
+******** PG CONTATO *********
+*****************************/
+#pg-contato .rodape {
+  margin-top: -10px;
+}
+
+.contato {
+  text-align: center;
+  padding-top: 50px;
+}
+
+.contato>div {
+  display: flex;
+}
+
+.contato-txt,
+.contato-form {
+  padding-top: 50px;
+  width: 50%;
+}
+
+.contato-txt p {
+  font-family: var(--fonte-texto);
+  font-size: 25px;
+  text-align: justify;
+  line-height: 35px;
+  text-indent: 20px;
+}
+
+.contato-txt>div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.contato-txt div div div {
+  background-color: var(--cor-fundo-1);
+  width: 270px;
+  height: 240px;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+
+.contato-txt h3 {
+  font-family: var(--fonte-titulo);
+  font-size: 30px;
+  color: var(--cor-primaria);
+  margin-top: 25px;
+  margin-bottom: 60px;
+}
+
+.contato-txt h4,
+.contato-txt a {
+  font-family: var(--fonte-texto);
+  font-size: 20px;
+  color: var(--cor-fundo-2);
+}
+
+.contato-txt a {
+  display: block;
+  text-decoration: none;
+}
+
+/* FORMULARIO CONTATO */
+.contato-form {
+  display: flex;
+  justify-content: center;
+}
+
+.contato-form form {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.contato-form form::before {
+  content: "Formulario de Contato";
+  font-family: var(--fonte-titulo);
+  font-size: 50px;
+  line-height: 1;
+  color: var(--cor-primaria);
+  text-align: left;
+}
+
+.contato-form form>div:nth-child(3),
+.contato-form form>div:nth-child(5) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.contato-form input,
+.contato-form select,
+.contato-form textarea,
+.contato-form button {
+  border: 1px solid var(--cor-fundo-2);
+  border-radius: 0;
+  box-sizing: border-box;
+  font-family: var(--fonte-texto);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.contato-form input,
+.contato-form select,
+.contato-form textarea {
+  width: 100%;
+  background-color: var(--cor-fundo-1);
+  color: var(--cor-texto);
+  padding: 14px 18px;
+  font-size: 20px;
+}
+
+.contato-form input,
+.contato-form select {
+  height: 50px;
+}
+
+.contato-form textarea {
+  resize: none;
+  height: 345px;
+}
+
+.contato-form input::placeholder,
+.contato-form textarea::placeholder {
+  color: #303030;
+  opacity: 1;
+}
+
+.contato-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.contato-form button {
+  font-size: 30px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--cor-secundaria-2);
+  transition: filter .25s ease, transform .25s ease;
+}
+
+.contato-form button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1200px) {
+  .contato-form form::before {
+    font-size: 44px;
+  }
+
+  .contato-form input,
+  .contato-form select,
+  .contato-form textarea {
+    font-size: 30px;
+  }
+
+  .contato-form button {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 900px) {
+  .contato-form form {
+    row-gap: 22px;
+  }
+
+  .contato-form form::before {
+    font-size: 36px;
+  }
+
+  .contato-form form>div:nth-child(3),
+  .contato-form form>div:nth-child(5) {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .contato-form input,
+  .contato-form select {
+    height: 68px;
+    font-size: 24px;
+  }
+
+  .contato-form textarea {
+    font-size: 24px;
+  }
+
+  .contato-form button {
+    height: 68px;
+    font-size: 30px;
+  }
+}

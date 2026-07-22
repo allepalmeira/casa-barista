@@ -16,7 +16,7 @@
                 <h3>Faça sua reserva</h3>
                 <div class="linha-box">
                     <hr>
-                    <img src="{{ asset('barita/assets/coffee-footer.svg')}}" alt="Faça sua reserva">
+                    <img src="{{ asset('barista/img/coffee-footer.svg')}}" alt="Faça sua reserva">
                     <hr>
                 </div>
                 <ul>
@@ -46,7 +46,7 @@
                     <label for="email">Inscreva-se</label>
                     <input type="email" name="email" id="email" placeholder="Informe seu email">
                     <button type="submit" aria-label="Enviar">
-                        <img src="{{ asset('barista/assets/arrow.svg') }}" alt="Botão Enviar">
+                        <img src="{{ asset('barista/img/arrow.svg') }}" alt="Botão Enviar">
                     </button>
                 </form>
             </div>
@@ -62,23 +62,23 @@
             <ul class="redeSocial">
                 <li>
                     <a href="#" target="_blank">
-                        <img src="{{ asset('barista/assets/facebook-24.png') }}" alt="Logo Facebook - Casa do Barista">
+                        <img src="{{ asset('barista/img/facebook-24.png') }}" alt="Logo Facebook - Casa do Barista">
                     </a>
                 </li>
                 <li>
                     <a href="#" target="_blank">
-                        <img src="{{ asset('barista/assets/instagram-24.png') }}" alt="Logo Instagram - Casa do Barista">
+                        <img src="{{ asset('barista/img/instagram-24.png') }}" alt="Logo Instagram - Casa do Barista">
                     </a>
                 </li>
                 <li>
                     <a href="#" target="_blank">
-                        <img src="{{ asset('barista/assets/linkedin-24.png') }}" alt="Logo LinkedIn - Casa do Barista">
+                        <img src="{{ asset('barista/img/linkedin-24.png') }}" alt="Logo LinkedIn - Casa do Barista">
                     </a>
                 </li>
                 <li>
                     <a href="https://wa.me/5511988662233?text=Ol%C3%A1%21%20Gostaria%20de%20falar%20com%20a%20Casa%20Do%20Barista%20%E2%98%95"
                         target="_blank">
-                        <img src="{{ asset('barista/assets/whatsapp-24.png') }}" alt="Logo WhastApp - Casa do Barista">
+                        <img src="{{ asset('barista/img/whatsapp-24.png') }}" alt="Logo WhastApp - Casa do Barista">
                     </a>
                 </li>
             </ul>

@@ -30,17 +30,17 @@
             <div>
                 <!-- LOGIN -->
                 <a href="#" class="login">
-                    <img src="assets/login.png" alt="Login Casa do Barista">
+                    <img src="{{ asset('barista/img/login.png') }}" alt="Login Casa do Barista">
                 </a>
 
                 <!-- Rede Social  | ul>li*3>a>img -->
                 <ul class="redeSocial">
-                    <li><a href="#" target="_blank"><img src="assets/facebook-24.png"
+                    <li><a href="#" target="_blank"><img src="{{ asset('barista/img/facebook-24.png') }}"
                                 alt="Logo Facebook - Casa do Barista"></a></li>
-                    <li><a href="#" target="_blank"><img src="assets/instagram-24.png"
+                    <li><a href="#" target="_blank"><img src="{{ asset('barista/img/instagram-24.png') }}"
                                 alt="Logo Instagram - Casa do Barista"></a></li>
                     <li><a href="https://wa.me/5511988662233?text=Ol%C3%A1%21%20Gostaria%20de%20falar%20com%20a%20Casa%20Do%20Barista%20%E2%98%95"
-                            target="_blank"><img src="assets/whatsapp-24.png" alt="Logo WhastApp - Casa do Barista"></a>
+                            target="_blank"><img src="{{ asset('barista/img/whatsapp-24.png') }}" alt="Logo WhastApp - Casa do Barista"></a>
                     </li>
                 </ul>
             </div>

@@ -7,7 +7,7 @@
     <div class="site cardEventos slideEventos  wow animate__animated animate__fadeInUp">
 
         <article>
-            <img src="{{ asset('assets/evento1.png') }}') }}" alt="Evento Casa do Barista">
+            <img src="{{ asset('barista/img/evento1.png') }}" alt="Evento Casa do Barista">
 
             <h4>Degustação Orientada</h4>
             <h5>Sabores do Café Brasileiro</h5>
@@ -27,7 +27,7 @@
 
             <div class="linha-grao">
                 <hr>
-                <img src="{{ asset('assets/coffee.svg') }}" alt="Grão de café">
+                <img src="{{ asset('barista/img/coffee.svg') }}" alt="Grão de café">
                 <hr>
             </div>
 
@@ -35,7 +35,7 @@
         </article>
 
         <article>
-            <img src="{{ asset('assets/evento2.png') }}" alt="Evento Casa do Barista">
+            <img src="{{ asset('barista/img/evento2.png') }}" alt="Evento Casa do Barista">
 
             <h4>Degustação Orientada</h4>
             <h5>Sabores do Café Brasileiro</h5>
@@ -55,7 +55,7 @@
 
             <div class="linha-grao">
                 <hr>
-                <img src="{{ asset('assets/coffee.svg') }}" alt="Grão de café">
+                <img src="{{ asset('barista/img/coffee.svg') }}" alt="Grão de café">
                 <hr>
             </div>
 
@@ -63,7 +63,7 @@
         </article>
 
         <article>
-            <img src="{{ asset('assets/evento3.png') }}" alt="Evento Casa do Barista">
+            <img src="{{ asset('barista/img/evento3.png') }}" alt="Evento Casa do Barista">
 
             <h4>Degustação Orientada</h4>
             <h5>Sabores do Café Brasileiro</h5>
@@ -83,7 +83,7 @@
 
             <div class="linha-grao">
                 <hr>
-                <img src="{{ asset('assets/coffee.svg') }}" alt="Grão de café">
+                <img src="{{ asset('barista/img/coffee.svg') }}" alt="Grão de café">
                 <hr>
             </div>
 
@@ -91,7 +91,7 @@
         </article>
 
         <article>
-            <img src="{{ asset('assets/evento4.png') }}" alt="Evento Casa do Barista">
+            <img src="{{ asset('barista/img/evento4.png') }}" alt="Evento Casa do Barista">
 
             <h4>Degustação Orientada</h4>
             <h5>Sabores do Café Brasileiro</h5>
@@ -111,7 +111,7 @@
 
             <div class="linha-grao">
                 <hr>
-                <img src="{{ asset('assets/coffee.svg') }}" alt="Grão de café">
+                <img src="{{ asset('barista/img/coffee.svg') }}" alt="Grão de café">
                 <hr>
             </div>
 
@@ -119,7 +119,7 @@
         </article>
 
         <article>
-            <img src="{{ asset('assets/evento1.png') }}" alt="Evento Casa do Barista">
+            <img src="{{ asset('barista/img/evento1.png') }}" alt="Evento Casa do Barista">
 
             <h4>Degustação Orientada</h4>
             <h5>Sabores do Café Brasileiro</h5>
@@ -139,7 +139,7 @@
 
             <div class="linha-grao">
                 <hr>
-                <img src="{{ asset('assets/coffee.svg') }}" alt="Grão de café">
+                <img src="{{ asset('barista/img/coffee.svg') }}" alt="Grão de café">
                 <hr>
             </div>
 
@@ -147,7 +147,7 @@
         </article>
 
         <article>
-            <img src="{{ asset('assets/evento2.png') }}" alt="Evento Casa do Barista">
+            <img src="{{ asset('barista/img/evento2.png') }}" alt="Evento Casa do Barista">
 
             <h4>Degustação Orientada</h4>
             <h5>Sabores do Café Brasileiro</h5>
@@ -167,7 +167,7 @@
 
             <div class="linha-grao">
                 <hr>
-                <img src="{{ asset('assets/coffee.svg') }}" alt="Grão de café">
+                <img src="{{ asset('barista/img/coffee.svg') }}" alt="Grão de café">
                 <hr>
             </div>
 
@@ -175,7 +175,7 @@
         </article>
 
         <article>
-            <img src="{{ asset('assets/evento3.png') }}" alt="Evento Casa do Barista">
+            <img src="{{ asset('barista/img/evento3.png') }}" alt="Evento Casa do Barista">
 
             <h4>Degustação Orientada</h4>
             <h5>Sabores do Café Brasileiro</h5>
@@ -195,7 +195,7 @@
 
             <div class="linha-grao">
                 <hr>
-                <img src="{{ asset('assets/coffee.svg') }}" alt="Grão de café">
+                <img src="{{ asset('barista/img/coffee.svg') }}" alt="Grão de café">
                 <hr>
             </div>
 
@@ -203,7 +203,7 @@
         </article>
 
         <article>
-            <img src="{{ asset('assets/evento4.png') }}" alt="Evento Casa do Barista">
+            <img src="{{ asset('barista/img/evento4.png') }}" alt="Evento Casa do Barista">
 
             <h4>Degustação Orientada</h4>
             <h5>Sabores do Café Brasileiro</h5>
@@ -223,7 +223,7 @@
 
             <div class="linha-grao">
                 <hr>
-                <img src="{{ asset('assets/coffee.svg') }}" alt="Grão de café">
+                <img src="{{ asset('barista/img/coffee.svg') }}" alt="Grão de café">
                 <hr>
             </div>
 

@@ -1,0 +1,528 @@
+/*##################################*/
+/*      ATÉ 1200px (NOTEBOOK)       */
+/*##################################*/
+@media (max-width: 1200px) {
+
+
+    .menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        align-items: end;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .menu ul {
+        order: 4;
+    }
+
+    .topo h1 {
+        margin: 20px;
+    }
+
+    .menu div .redeSocial {
+        margin: 0 20px;
+    }
+
+    .menu div .redeSocial li a {
+        margin: 0;
+    }
+
+    .menu ul li a {
+        font-size: 18px;
+    }
+
+    .menu .redeSocial {
+        order: 3;
+
+    }
+
+    /* BOX BEM VIND */
+    .bem-vindo article {
+        width: 350px;
+    }
+
+
+    /* BTN CARDAPIO */
+    .btn-cardapio {
+        padding: 0;
+    }
+
+    .cardapio .card-cardapio {
+        justify-content: space-around;
+    }
+
+    /* SETAS DO SLIDE EVENTOS E DEPO*/
+    .eventos .slick-prev,
+    .eventos .slick-next {
+        top: 690px;
+    }
+
+    .eventos .slick-prev,
+    .itensDepo .slick-prev {
+        left: 40px;
+    }
+
+    .eventos .slick-next,
+    .itensDepo .slick-next {
+        right: 80px;
+    }
+
+}
+
+/* FIM DO MEDIA 1200px - NOTEBOOK */
+
+/*##################################*/
+/*      ATÉ 768px (TABLET)       */
+/*##################################*/
+@media not all and (max-width: 768px) {
+
+    .abrir-menu,
+    .fechar-menu {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+
+
+    .topo h1 {
+        margin: 10px;
+    }
+
+    /* MENU */
+    .menu {
+        background-color: rgba(181, 106, 52, 0.95);
+        height: 100%;
+        position: fixed;
+        max-width: 380px;
+        width: 60%;
+        z-index: 10;
+        top: 0;
+        right: -400px;
+        transition: right 1s ease-in-out;
+        box-shadow: -3px 0 5px rgba(69, 40, 20, 0.5);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu-ativo {
+        color: var(--cor-texto) !important;
+    }
+
+    .menu-mobile .menu {
+        right: 0;
+    }
+
+    .menu ul {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .menu ul li a:hover {
+        color: var(--cor-texto);
+    }
+
+    .abrir-menu {
+        background-image: url(../assets/menu.png);
+        background-size: cover;
+        padding: 18px;
+        border: 0;
+        display: block;
+        margin-right: 20px;
+    }
+
+    .fechar-menu {
+        background-image: url(../assets/fechar.png);
+        background-size: cover;
+        padding: 18px;
+        border: 0;
+        display: block;
+        margin: 10px;
+        align-self: start;
+    }
+
+    .menu .redeSocial {
+        flex-direction: row;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .menu .redeSocial li a {
+        margin: 0;
+    }
+
+    /* FIM MENU */
+
+
+    .banner {
+        display: none;
+    }
+
+    /* BEM VINDO */
+    .bem-vindo header p {
+        width: auto;
+    }
+
+    .bem-vindo div div {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+
+    .bem-vindo article {
+        width: 85%;
+    }
+
+    /* FIM BEM VINDO */
+
+    .destaque .card {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .destaque article {
+        width: 95%;
+        height: auto;
+    }
+
+    .card-flip {
+        width: 43%;
+    }
+
+    .btn-cardapio {
+        margin-top: 40px;
+        justify-content: center;
+    }
+
+    .cardEquipe {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .cardEquipe article {
+        width: 30%;
+        height: auto;
+    }
+
+    .equipe h5 {
+        margin-bottom: 20px;
+    }
+
+    .eventos .slick-prev,
+    .eventos .slick-next {
+        top: 600px;
+    }
+
+    .depo .parallax-padrao h3 {
+        font-size: 28px;
+        -webkit-text-stroke: .5px var(--cor-fundo-1);
+    }
+
+    .dadosDepo p {
+        width: 95%;
+        font-size: 20px;
+    }
+
+    .depo .itensDepo .slick-prev:before,
+    .itensDepo .slick-next:before {
+        font-size: 40px;
+    }
+
+    .depo .slick-next,
+    .itensDepo .slick-next {
+        right: 60px;
+    }
+
+    .dadosDepo div {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dadosDepo h5 {
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
+
+    /* RODAPE */
+    .coluna-end {
+        margin-top: 50px;
+    }
+
+    .rodape .rodape-grid {
+        flex-direction: column;
+    }
+
+    .coluna-reserva {
+        width: auto;
+    }
+
+    .box-reserva {
+        top: 10px;
+        width: 90%;
+        padding: 15px;
+    }
+
+    /* NEWSLETTER */
+    .box-email p {
+        margin-top: 50px;
+        margin-bottom: 15px;
+    }
+
+    .box-email form {
+        width: 90%;
+    }
+
+    .box-email form label {
+        padding: 8px;
+        font-size: 15px;
+    }
+
+    .box-email form button {
+        width: 44px;
+    }
+
+    .box-email form button img {
+        width: 20px;
+        height: 20px;
+        display: block;
+    }
+
+    .coluna-contato {
+        margin-bottom: 30px;
+    }
+
+
+
+
+}
+
+/* FIM DO MEDIA 768px - TABLET */
+
+
+/*##################################*/
+/*      ATÉ 380px (CELULAR)       */
+/*##################################*/
+
+/* Fim  not all and 380px */
+
+@media (max-width: 380px) {
+
+    .topo h1 {
+        margin: 10px;
+    }
+
+    /* MENU */
+    .menu {
+        background-color: rgba(181, 106, 52, 0.95);
+        height: 100%;
+        position: fixed;
+        max-width: 230px;
+        width: 45%;
+        z-index: 10;
+        top: 0;
+        right: -200px;
+        transition: right 1s ease-in-out;
+        box-shadow: -3px 0 5px rgba(69, 40, 20, 0.5);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu-ativo {
+        color: var(--cor-texto) !important;
+    }
+
+    .menu-mobile .menu {
+        right: 0;
+    }
+
+    .menu ul {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .menu ul li a:hover {
+        color: var(--cor-texto);
+    }
+
+    .abrir-menu {
+        background-image: url(../assets/menu.png);
+        background-size: cover;
+        padding: 18px;
+        border: 0;
+        display: block;
+        margin-right: 20px;
+    }
+
+    .fechar-menu {
+        background-image: url(../assets/fechar.png);
+        background-size: cover;
+        padding: 18px;
+        border: 0;
+        display: block;
+        margin: 10px;
+        align-self: start;
+    }
+
+    .menu .redeSocial {
+        flex-direction: row;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .menu .redeSocial li a {
+        margin: 0;
+    }
+
+    /* FIM MENU */
+
+
+    .banner {
+        display: none;
+    }
+
+    /* BEM VINDO */
+    .bem-vindo header p {
+        width: auto;
+    }
+
+    .bem-vindo div div {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+
+    .bem-vindo article {
+        width: 85%;
+    }
+
+    /* FIM BEM VINDO */
+
+    .destaque .card {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .destaque article {
+        width: 95%;
+        height: auto;
+    }
+
+    .card-flip {
+        width: 95%;
+    }
+
+    .btn-cardapio {
+        margin-top: 40px;
+        justify-content: center;
+    }
+
+    .cardEquipe {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cardEquipe article {
+        width: 85%;
+        height: auto;
+    }
+
+    .eventos .slick-prev,
+    .eventos .slick-next {
+        top: 600px;
+    }
+
+    .depo .parallax-padrao h3 {
+        font-size: 28px;
+        -webkit-text-stroke: .5px var(--cor-fundo-1);
+    }
+
+    .dadosDepo p {
+        width: 95%;
+        font-size: 20px;
+    }
+
+    .depo .itensDepo .slick-prev:before,
+    .itensDepo .slick-next:before {
+        font-size: 40px;
+    }
+
+    .depo .slick-next,
+    .itensDepo .slick-next {
+        right: 60px;
+    }
+
+    .dadosDepo div {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dadosDepo h5 {
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
+
+    /* RODAPE */
+    .coluna-end {
+        margin-top: 50px;
+    }
+
+    .rodape .rodape-grid {
+        flex-direction: column;
+    }
+
+    .coluna-reserva {
+        width: 98%;
+    }
+
+    .box-reserva {
+        top: 10px;
+        width: 90%;
+        padding: 15px;
+    }
+
+    /* NEWSLETTER */
+    .box-email p {
+        margin-top: 50px;
+        margin-bottom: 15px;
+    }
+
+    .box-email form {
+        width: 90%;
+    }
+
+    .box-email form label {
+        padding: 8px;
+        font-size: 15px;
+    }
+
+    .box-email form button {
+        width: 44px;
+    }
+
+    .box-email form button img {
+        width: 20px;
+        height: 20px;
+        display: block;
+    }
+
+    .coluna-contato {
+        margin-bottom: 30px;
+    }
+
+
+}
+
+/* FIM DO MEDIA 380px - CELULAR */

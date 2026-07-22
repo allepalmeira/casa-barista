@@ -16,21 +16,21 @@
             <article>
                 <h5>2025</h5>
                 <h4>INAUGURAÇÃO</h4>
-                <img src="{{ asset('assets/coffee.svg') }}" alt="Casa do Barista - INAUGURAÇÃO">
+                <img src="{{ asset('barista/img/coffee.svg') }}" alt="Casa do Barista - INAUGURAÇÃO">
                 <p>Desde o espresso perfeito até métodos filtrados como V60, prensa francesa e Aeropress.</p>
             </article>
 
             <article>
                 <h5>2025</h5>
                 <h4>NOVA UNIDADE</h4>
-                <img src="{{ asset('assets/coffee.svg') }}" alt="Casa do Barista - NOVA UNIDADE">
+                <img src="{{ asset('barista/img/coffee.svg') }}" alt="Casa do Barista - NOVA UNIDADE">
                 <p>Trabalhamos com fazendas familiares e microlotes que garantem qualidade e história.</p>
             </article>
 
             <article>
                 <h5>2025</h5>
                 <h4>FRANQUIAS</h4>
-                <img src="{{ asset('assets/coffee.svg') }}" alt="Casa do Barista - FRANQUIAS">
+                <img src="{{ asset('barista/img/coffee.svg') }}" alt="Casa do Barista - FRANQUIAS">
                 <p>Receitas feitas para harmonizar com os cafés, com foco em ingredientes frescos e artesanais.
                 </p>
             </article>
