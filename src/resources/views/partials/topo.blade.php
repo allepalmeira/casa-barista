@@ -14,16 +14,16 @@
                     <a class="menu-ativo" href="{{ route('home') }}">Home</a>
                 </li>
                 <li>
-                    <a class="" href="{{ route('home') }}">Sobre</a>
+                    <a class="" href="{{ route('sobre') }}">Sobre</a>
                 </li>
                 <li>
-                    <a class="" href="{{ route('home') }}">Cardápio</a>
+                    <a class="" href="{{ route('cardapio') }}">Cardápio</a>
                 </li>
                 <li>
-                    <a class="" href="{{ route('home') }}">Eventos</a>
+                    <a class="" href="{{ route('evento') }}">Eventos</a>
                 </li>
                 <li>
-                    <a class="" href="{{ route('home') }}">Contato</a>
+                    <a class="" href="{{ route('contato') }}">Contato</a>
                 </li>
             </ul>
 
