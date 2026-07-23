@@ -8,7 +8,7 @@
         <!-- INÍCIO DA SEÇÃO EQUIPE -->
         @include('site.contato.cont-contato')
 
-        <!-- INÍCIO DA SEÇÃO DEPOIMENTO -->
+        <!-- INÍCIO DA SEÇÃO MAP -->
         @include('site.contato.map')
 
     
