@@ -658,6 +658,15 @@ p {
   width: 20px;
 }
 
+.estrela-ativa{
+  opacity: 1;
+}
+
+.estrela-inativa{
+  opacity: 0.2;
+}
+
+
 .itensDepo .slick-prev:before,
 .itensDepo .slick-next:before {
   font-size: 60px;
