@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/sobre', [SobreController::class, 'sobre'])->name('sobre');
+
 Route::get('/cardapio', [CardapioController::class, 'cardapio'])->name('cardapio');
+Route::get('/cardapio/categoria/{idCategoria}', [CardapioController::class, 'cardapio'])->name('cardapio.categoria');
+
+
+
 Route::get('/evento', [EventoController::class, 'evento'])->name('evento');
 Route::get('/contato', [ContatoController::class, 'contato'])->name('contato');
