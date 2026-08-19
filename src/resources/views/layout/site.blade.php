@@ -2,19 +2,19 @@
 <html lang="pt-br">
 
 <head>
-    @include('partials.head')
+    @include('partials.site.head')
 </head>
 
 <body>
-    @include('partials.topo')
+    @include('partials.site.topo')
     <!-- TESTE -->
     <main>
         @yield('content')
     </main>
 
-    @include('partials.rodape')
+    @include('partials.site.rodape')
 
-    @include('partials.script')
+    @include('partials.site.script')
 </body>
 
 </html>

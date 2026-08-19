@@ -37,7 +37,6 @@ class CardapioController extends Controller
         ->get();
 
         //dd($produtos);
-
         //dd($listaCategorias);
 
         return view('site.cardapio.cardapio', compact('listaCategorias', 'listaProdutos', 'produtos', 'categoriaSelecionada'));

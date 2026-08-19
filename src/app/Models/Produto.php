@@ -5,7 +5,7 @@ use App\Models\Categoria;
 
 use Illuminate\Database\Eloquent\Model;
 
-Class Produto extends Model{
+class Produto extends Model{
 
     protected $table = 'tbl_produto';
     protected $primaryKey = 'id_produto';
