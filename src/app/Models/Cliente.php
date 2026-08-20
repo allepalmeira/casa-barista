@@ -29,8 +29,5 @@ Class Cliente extends Model{
     public function ClienteDepoimento(){
         return $this->hasMany(Depoimento::class, 'id_cliente', 'id_cliente');
     }
-      	
-
-
-
+    
 }
