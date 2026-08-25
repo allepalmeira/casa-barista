@@ -28,7 +28,7 @@
               id="navigation"
             >
               <li class="nav-item menu-open">
-                <a href="{{ route('home') }}" class="nav-link active">
+                <a href="{{ route('dashboard') }}" class="nav-link active">
                   <i class="nav-icon bi bi-speedometer"></i>
                   <p>
                     Dashboard                    
@@ -69,7 +69,7 @@
                 </li>
               <li class="nav-header">SITE</li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.banner.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill"></i>
                   <p>
                     Banner                    

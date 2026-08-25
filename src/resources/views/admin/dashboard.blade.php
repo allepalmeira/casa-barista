@@ -1,7 +1,7 @@
 @extends('layout.dashboard')
 
 @section('content')
-
-      <h1>DASHBOARD</h1>   
+      
+      @include('admin.cards')
 
 @endsection
