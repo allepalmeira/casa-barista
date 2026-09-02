@@ -1,3 +1,58 @@
+/*GOOGLE */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/*LOCAL */
+@font-face {
+  font-family: "Geometry Soft Pro-Bold N";
+  src: url(../fonts/Geometry-Soft\ Pro-Bold\ N.otf) format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+/*
+======================================
+VARIÁVEIS DA CASA DO BARISTA
+======================================
+*/
+
+:root {
+
+  /* CORES */
+  --cor-fundo-1: #F3E8DC;
+  --cor-fundo-2: #2e2e2e;
+  --cor-primaria: #4b2e1e;
+  --cor-secundaria-1: #8b5e3c;
+  --cor-secundaria-2: #b56a34;
+  --cor-destaque: #5c6945;
+
+  --cor-texto: #2e2e2e;
+  --cor-titulo: #4b2e1e;
+  --cor-subtitulo: #8b5e3c;
+
+
+  /* FONTES */
+  --fonte-texto: "Bebas Neue", sans-serif;
+  --fonte-titulo: "Geometry Soft Pro-Bold N";
+
+}
+main{
+    background: var(--cor-fundo-1);
+}
+h1, h2, h3, h4, h5, h6, ul{
+    font-family: var(--fonte-titulo);
+    color: var(--cor-primaria);
+}
+h3{
+    color: var(--cor-secundaria-1);
+}
+p, a{
+    font-family: var(--fonte-texto);
+    color: var(--cor-subtitulo) !important;
+}
+.app-header{
+    background-color: #0b0b0b !important;
+}
 .app-sidebar{
     background: #0b0b0b !important;
 }
@@ -7,4 +62,28 @@
 .sidebar-brand .brand-link .brand-image{
     width: 150px;
     max-height: none;
+}
+.breadcrumb a{
+    color: var(--cor-primaria);
+}
+
+.breadcrumb-item.active{
+    color: var(--cor-secundaria-2);
+    font-family: var(--fonte-texto);
+}
+
+.text-bg-primary, .text-bg-success, .text-bg-warning, .text-bg-danger{
+    background-color: var(--cor-primaria) !important;
+}
+
+.link-dark{
+    color: var(--cor-secundaria-1) !important;
+}
+.link-light{
+    color: var(--cor-fundo-1) !important;
+}
+.app-footer{
+    background-color: var(--cor-fundo-2);
+    font-family: var(--fonte-texto);
+    color: var(--cor-fundo-1);
 }

@@ -1,11 +1,8 @@
 <?php
 
-
 namespace App\Models;
 
-
 use illuminate\Database\Eloquent\Model;
-
 
 Class Cliente extends Model{
 
@@ -29,8 +26,5 @@ Class Cliente extends Model{
     public function ClienteDepoimento(){
         return $this->hasMany(Depoimento::class, 'id_cliente', 'id_cliente');
     }
-      	
-
-
-
+    
 }
