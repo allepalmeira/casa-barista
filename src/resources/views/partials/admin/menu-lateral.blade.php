@@ -37,13 +37,13 @@
               </li>
               <li class="nav-header">PRODUTOS</li>
               <li class="nav-item">
-                <a href="./starter.html" class="nav-link">
+                <a href="{{ route('admin.produto.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill"></i>
                   <p>Produtos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./generate/theme.html" class="nav-link">
+                <a href="{{ route('admin.categoria.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill"></i>
                   <p>Categorias</p>
                 </a>
@@ -77,7 +77,7 @@
                 </a>                
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.galeria.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill"></i>
                   <p>Galeria</p>
                 </a>

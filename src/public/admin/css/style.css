@@ -72,8 +72,15 @@ p, a{
     font-family: var(--fonte-texto);
 }
 
-.text-bg-primary, .text-bg-success, .text-bg-warning, .text-bg-danger{
+.text-bg-primary, .text-bg-success{
     background-color: var(--cor-primaria) !important;
+}
+.text-bg-warning, .text-bg-danger{
+    background-color: var(--cor-secundaria-2) !important;
+}
+.text-bg-warning>h3, .text-bg-danger>h3{
+    background-color: var(--cor-secundaria-2) !important;
+    color: var(--cor-primaria) !important;
 }
 
 .link-dark{
@@ -86,4 +93,61 @@ p, a{
     background-color: var(--cor-fundo-2);
     font-family: var(--fonte-texto);
     color: var(--cor-fundo-1);
+}
+.card{
+    background-color: var(--cor-primaria) !important;
+}
+th{
+    background-color: var(--cor-primaria) !important;
+}
+td{
+    background-color: var(--cor-fundo-1) !important;
+    color: var(--cor-texto) !important;
+}
+.active > .page-link{
+    background-color: var(--cor-destaque) !important;
+    border-color: var(--cor-destaque) !important;
+    color: var(--cor-fundo-1) !important;
+}
+.btn-primary{
+    background-color: var(--cor-destaque) !important;
+    border-color: var(--cor-destaque) !important;
+}
+.modal-header, .modal-footer, .modal-header>h5{
+    background-color: var(--cor-primaria) !important;
+    color: var(--cor-fundo-1) !important;
+}
+.modal-body{
+    background-color: var(--cor-fundo-1) !important;
+    color: var(--cor-texto) !important;
+}
+.form-text{
+    color: var(--cor-destaque);
+}
+.form-control, .form-select{
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo-1) !important;
+}
+.form-control:focus, .form-select:focus{
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo-1);
+    border-color: #5c6945b7;
+    box-shadow: var(--bs-box-shadow-inset), 0 0 0 0.25rem #5c694540;
+}
+.text-table{
+    font-size: 1em;
+    color: var(--cor-texto);
+}
+
+.btn-categoria{
+    color: var(--cor-destaque);
+    border-color: var(--cor-destaque);
+}
+.btn-categoria:hover{
+    background-color: var(--cor-secundaria-2);
+    border-color: var(--cor-destaque);
+}
+.btn-categoria:active{
+    background-color: var(--cor-secundaria-1) !important;
+    border-color: var(--cor-destaque) !important;
 }
