@@ -6,13 +6,13 @@
             <!--begin::Row-->
             <div class="row">
               <div class="col-sm-6">
-                <h1 class="mb-0 fs-3">Banners</h1>
+                <h1 class="mb-0 fs-3">Produto</h1>
               </div>
               <div class="col-sm-6">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb float-sm-end">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Banners</li>
+                    <li class="breadcrumb-item active" aria-current="page">Produto</li>
                   </ol>
                 </nav>
               </div>
@@ -36,7 +36,7 @@
                   <div class="card-header">
                     <div class="row g-2 align-items-center">
                       <div class="col-12 col-md-4">
-                        <h3 class="card-title">Banners cadastrados</h3>
+                        <h3 class="card-title">Produtos cadastrados</h3>
                       </div>
                       <div class="col-12 col-md-8">
                         <div class="d-flex flex-wrap justify-content-md-end gap-2">
@@ -46,15 +46,15 @@
                             </span>
                             <input
                               type="search"
-                              id="banner-search"
+                              id="produto-search"
                               class="form-control"
-                              placeholder="Pesquisar banners"
-                              aria-label="Pesquisar banners"
+                              placeholder="Pesquisar produtos"
+                              aria-label="Pesquisar produtos"
                               style="width: 180px"
                             />
                           </div>
                           <select
-                            id="banner-role-filter"
+                            id="produto-role-filter"
                             class="form-select form-select-sm w-auto"
                             aria-label="Filter by role"
                           >
@@ -66,10 +66,10 @@
                             type="button"
                             class="btn btn-sm btn-primary"
                             data-bs-toggle="modal"
-                            data-bs-target="#modal-add-banner"
+                            data-bs-target="#modal-add-produto"
                           >
                             <i class="bi bi-person-plus-fill me-1" aria-hidden="true"> </i>
-                            Novo banner
+                            Novo produto
                           </button>
                         </div>
                       </div>
@@ -84,9 +84,17 @@
                           <tr>
                             <th>Código</th>
 
-                            <th>Imagem</th>
+                            <th>Foto</th>
 
-                            <th>Título</th>
+                            <th>Produto</th>
+
+                            <th>Categoria</th>
+
+                            <th>Descrição</th>
+
+                            <th>Valor</th>
+
+                            <th>Destaque</th>
 
                             <th>Status</th>
 
@@ -96,18 +104,18 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @forelse($listaBanner as $banner)
+                          @forelse($listaProdutos as $produto)
                             <tr>
                               {{--ID--}}
                               <td>
-                                {{$banner->id_banner}}                              
+                                {{$produto->id_produto}}                              
                               </td>
                               {{--Imagem--}}
                               <td>
-                                @if($banner->imagem_banner)
+                                @if($produto->imagem_produto)
                                   <img
-                                    src="{{ asset('barista/img/' . $banner->imagem_banner) }}"
-                                    alt="{{ $banner->titulo_banner }}"
+                                    src="{{ asset('barista/img/' . $produto->imagem_produto) }}"
+                                    alt="{{ $produto->nome_produto }}"
                                     class="rounded"
                                     style="
                                         width: 100px;
@@ -124,12 +132,42 @@
                               {{-- Título --}}
                               <td>
                                 <span class="badge text-table">
-                                  {{ $banner->titulo_banner }}
+                                  {{ $produto->nome_produto }}
                                 </span>
+                              </td>
+                              {{-- Categoria --}}
+                              <td>
+                                <span class="badge text-table">
+                                  {{ $produto->categoria?->nome_categoria }}
+                                </span>
+                              </td>
+                              {{-- Descrição --}}
+                              <td>
+                                <span class="badge text-table">
+                                  {{ $produto->descricao_curta_produto }}
+                                </span>
+                              </td>
+                              {{-- Valor --}}
+                              <td>
+                                <span class="badge text-table"> R$ 
+                                  {{ number_format($produto->valor_produto, 2, ',', '.') }}
+                                </span>
+                              </td>
+                              {{-- Destaque --}}
+                              <td>
+                                @if($produto->destaque_produto === 1)
+                                  <span class="badge text-bg-success">
+                                    Produto Destaque
+                                  </span>
+                                @else
+                                  <span class="badge text-bg-warning">
+                                    
+                                  </span>
+                                @endif
                               </td>
                               {{-- Status --}}
                               <td>
-                                @if($banner->status_banner === 'ATIVO')
+                                @if($produto->status_produto === 'ATIVO')
                                   <span class="badge text-bg-success">
                                     Ativo
                                   </span>
@@ -153,7 +191,7 @@
                                     type="button"
                                     class="btn btn-outline-danger"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#modal-delete-banner"
+                                    data-bs-target="#modal-delete-produto"
                                     aria-label="Deletar"
                                   >
                                     <i class="bi bi-trash" aria-hidden="true"> </i>
@@ -167,7 +205,7 @@
                                   colspan="5"
                                   class="text-center py-4 text-muted"
                               >
-                                  Nenhum banner cadastrado.
+                                  Nenhum produto cadastrado.
                               </td>
                             </tr>
                           @endforelse
@@ -180,9 +218,9 @@
                   <!--begin::Card Footer-->
                   <div class="card-footer clearfix">
                     <div class="float-start pt-1 fs-7 text-body-secondary">
-                      Total de banners: 
+                      Total de produtos: 
                       <strong>
-                        {{ $listaBanner-> count()}}
+                        {{ $produto -> count()}}
                       </strong>
                     </div>
                     <ul class="pagination pagination-sm m-0 float-end">
@@ -217,19 +255,19 @@
             </div>
             <!--end::Row-->
 
-            <!--begin::Add banner Modal-->
+            <!--begin::Add produto Modal-->
             <div
               class="modal fade"
-              id="modal-add-banner"
+              id="modal-add-produto"
               tabindex="-1"
-              aria-labelledby="modal-add-banner-label"
+              aria-labelledby="modal-add-produto-label"
               aria-hidden="true"
             >
               <div class="modal-dialog">
                 <div class="modal-content">
                   <form>
                     <div class="modal-header">
-                      <h5 class="modal-title" id="modal-add-banner-label">Cadastrar novo banner</h5>
+                      <h5 class="modal-title" id="modal-add-produto-label">Cadastrar novo produto</h5>
                       <button
                         type="button"
                         class="btn-close"
@@ -239,25 +277,53 @@
                     </div>
                     <div class="modal-body">
                       <div class="mb-3">
-                        <label for="new-banner-name" class="form-label"> Título Banner </label>
+                        <label for="new-produto-name" class="form-label"> Nome Produto </label>
                         <input
                           type="text"
                           class="form-control"
-                          id="new-banner-name"
-                          placeholder="Promoção de Verão"
+                          id="new-produto-name"
+                          placeholder="Café em xícara"
                           required
                         />
                       </div>
+                      <div class="mb-3">
+                        <label for="new-produto-role" class="form-label"> Categoria </label>
+                        <select id="new-produto-role" class="form-select">
+                          <option selected>CAFÉ</option>
+                          <option>PROMOÇÃO</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="new-produto-name" class="form-label"> Descrição curta </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="new-produto-name"
+                          placeholder="Café em xícara"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="new-produto-name" class="form-label"> Descrição Longa </label>
+                        <textarea
+                          type="text"
+                          class="form-control"
+                          id="new-produto-name"
+                          placeholder="Café em xícara"
+                          required
+                        >
+                        </textarea>
+                      </div>
                       <div class="mb-3">                        
-                        <label for="new-banner-role" class="form-label"> Selecione uma imagem </label>
+                        <label for="new-produto-role" class="form-label"> Selecione uma imagem </label>
                         <div class="input-group">
                           <input type="file" class="form-control" id="inputGroupFile02" />
                           <label class="input-group-text" for="inputGroupFile02">Carregar...</label>
                         </div>
                       </div>
                       <div class="mb-3">
-                        <label for="new-banner-role" class="form-label"> Status </label>
-                        <select id="new-banner-role" class="form-select">
+                        <label for="new-produto-role" class="form-label"> Status </label>
+                        <select id="new-produto-role" class="form-select">
                           <option selected>Ativo</option>
                           <option>Inativo</option>
                         </select>
@@ -273,20 +339,20 @@
                 </div>
               </div>
             </div>
-            <!--end::Add banner Modal-->
+            <!--end::Add produto Modal-->
 
-            <!--begin::Delete banner Modal-->
+            <!--begin::Delete produto Modal-->
             <div
               class="modal fade"
-              id="modal-delete-banner"
+              id="modal-delete-produto"
               tabindex="-1"
-              aria-labelledby="modal-delete-banner-label"
+              aria-labelledby="modal-delete-produto-label"
               aria-hidden="true"
             >
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="modal-delete-banner-label">Deletar banner</h5>
+                    <h5 class="modal-title" id="modal-delete-produto-label">Deletar produto</h5>
                     <button
                       type="button"
                       class="btn-close"
@@ -296,7 +362,7 @@
                   </div>
                   <div class="modal-body">
                     <p class="mb-0">
-                      Tem certeza de que deseja excluir este banner? <br>
+                      Tem certeza de que deseja excluir este produto? <br>
                       Todo o conteúdo pertencente à conta será transferido 
                       para o administrador do site. Esta ação não pode ser desfeita.
                     </p>
@@ -306,13 +372,13 @@
                       Cancelar
                     </button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                      Deletar banner
+                      Deletar produto
                     </button>
                   </div>
                 </div>
               </div>
             </div>
-            <!--end::Delete banner Modal-->
+            <!--end::Delete produto Modal-->
           </div>
           <!--end::Container-->
         </div>
