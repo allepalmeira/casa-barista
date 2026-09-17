@@ -323,9 +323,9 @@
                                     <label for="edit-banner-imagem" class="form-label"> Selecione uma imagem </label>
 
                                     <input type="file" class="form-control input-banner" id="edit-banner-imagem"
-                                        name="imagem_banner" accept="image/*" required />
+                                        name="imagem_banner" accept="image/*" />
 
-                                    <label for="img-banner" class="banner-upload">
+                                    <label for="edit-banner-imagem" class="banner-upload">                                    
 
                                         <img id="edit-banner-mostrar" src="" alt="banner">
 

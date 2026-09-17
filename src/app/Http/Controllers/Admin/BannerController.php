@@ -107,15 +107,15 @@ class BannerController extends Controller
     public function update(Request $request, int $id)
     {
 
-        // 1 - Validar os dados
+        // 1 - Validar os dados --
         $dados = $request->validate([
             'titulo_banner' => 'required|max:50',
-            'imagem_banner' => 'required|image|mimes:jpg,png,webp,jpeg|max:4096',
+            'imagem_banner' => 'nullable|image|mimes:jpg,png,webp,jpeg|max:4096',
             'status_banner' => 'required|in:ATIVO,INATIVO'
         ]);
 
-        // 2 - Buscar o banner
-        $banner = Banner::findOrFall($id);
+        // 2 - Buscar o banner --
+        $banner = Banner::findOrFail($id);
 
         try {
 
@@ -128,8 +128,8 @@ class BannerController extends Controller
             // O caminho salvo no banco
             $caminhoArquivo = $banner->imagem_banner;
 
-            // Caminho físico da imagem atual
-            $imgAntiga = public_path('barista/img' . $banner->imagem_banner);
+            // Caminho físico da imagem atual -- 
+            $imgAntiga = public_path('barista/img/' . $banner->imagem_banner);
 
             // CASO 1: NOVA IMAGEM
             if ($request->hasFile('imagem_banner')) {
@@ -150,9 +150,9 @@ class BannerController extends Controller
 
                 $caminhoArquivo = 'banner/' . $nomeImg;
             } elseif ($banner->titulo_banner !== $request->titulo_banner) {
-                // CASO 2 - MUDOU SOMENTE O NOME
 
-                $extensao = pathinfo($banner->titulo_banner, PATHINFO_EXTENSION);
+                // CASO 2 - MUDOU SOMENTE O NOME -- 
+                $extensao = pathinfo($banner->imagem_banner, PATHINFO_EXTENSION);
 
                 $nomeImg = $tituloSlug . '_' . $banner->id_banner . '.' . $extensao;
 

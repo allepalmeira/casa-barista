@@ -22,11 +22,12 @@ Route::get('/cardapio/categoria/{idCategoria}', [CardapioController::class, 'car
 Route::get('/evento', [EventoController::class, 'evento'])->name('evento');
 Route::get('/contato', [ContatoController::class, 'contato'])->name('contato');
 
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
 // RORAS DASHBOARD
 Route::prefix('admin')->group(function (){
 
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    
 
     // CRUD BANNER
     Route::get('/banner', [BannerController::class, 'index'])->name('admin.banner.index'); // Listar Banner
