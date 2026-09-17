@@ -196,7 +196,7 @@ class BannerController extends Controller
 
         try {
 
-            $banner = Banner::findOrFall($id);
+            $banner = Banner::findOrFail($id);
 
             $novoStatus = $banner->status_banner === 'ATIVO' ? 'INATIVO' : 'ATIVO';
 

@@ -160,12 +160,44 @@
                                                             <i class="bi bi-pencil" aria-hidden="true"> </i>
                                                         </button>
 
-                                                        {{-- ATIVAR / DESATIVAR --}}
-                                                        <button type="button" class="btn btn-outline-danger"
-                                                            data-bs-toggle="modal" data-bs-target="#modal-delete-banner"
-                                                            aria-label="Deletar">
-                                                            <i class="bi bi-trash" aria-hidden="true"> </i>
-                                                        </button>
+                                                        {{-- INICIO ATIVAR / DESATIVAR --}}
+                                                        <form
+                                                            action="{{ route('admin.banner.status', $banner->id_banner) }}"
+                                                            method="POST" class="d-inline">
+
+                                                            @csrf
+                                                            @method('PATCH')
+
+                                                            @if ($banner->status_banner === 'ATIVO')
+                                                                <button type="submit" class="btn btn-outline-danger"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#modal-status-banner"
+                                                                    title="Desativar banner"
+                                                                    data-url="{{ route('admin.banner.status', $banner->id_banner) }}"
+                                                                    data-titulo="{{ $banner->titulo_banner }}"
+                                                                    data-status="ATIVO" aria-label="Deletar">
+
+                                                                    <i class="bi bi-eye-fill" aria-hidden="true"> </i>
+                                                                </button>
+                                                            @else
+                                                                <button type="submit" class="btn btn-outline-success"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#modal-status-banner"
+                                                                    title="Desativar banner"
+                                                                    data-url="{{ route('admin.banner.status', $banner->id_banner) }}"
+                                                                    data-titulo="{{ $banner->titulo_banner }}"
+                                                                    data-status="INATIVO" aria-label="Deletar">
+
+                                                                    <i class="bi bi-eye-slash" aria-hidden="true">
+                                                                    </i>
+                                                                </button>
+                                                            @endif
+
+                                                        </form>
+
+
+
+                                                        {{-- FIM ATIVAR / DESATIVAR --}}
 
 
                                                     </div>
@@ -224,7 +256,7 @@
             </div>
             <!--end::Row-->
 
-            <!--begin::Add banner Modal-->
+            {{-- INICIO - MODAL CADASTRO BANNER  --}}
             <div class="modal fade" id="modal-add-banner" tabindex="-1" aria-labelledby="modal-add-banner-label"
                 aria-hidden="true">
                 <div class="modal-dialog">
@@ -290,10 +322,11 @@
                     </div>
                 </div>
             </div>
-            <!--end::Add banner Modal-->
+            {{-- FIM - MODAL CADASTRO BANNER  --}}
+
+
 
             {{-- INICIO - MODAL EDITAR BANNER  --}}
-
             <div class="modal fade" id="modal-edit-banner" tabindex="-1" aria-labelledby="modal-add-banner-label"
                 aria-hidden="true">
                 <div class="modal-dialog">
@@ -325,7 +358,7 @@
                                     <input type="file" class="form-control input-banner" id="edit-banner-imagem"
                                         name="imagem_banner" accept="image/*" />
 
-                                    <label for="edit-banner-imagem" class="banner-upload">                                    
+                                    <label for="edit-banner-imagem" class="banner-upload">
 
                                         <img id="edit-banner-mostrar" src="" alt="banner">
 
@@ -362,38 +395,47 @@
                     </div>
                 </div>
             </div>
-
             {{-- FIM - MODAL EDITAR BANNER  --}}
 
-            <!--begin::Delete banner Modal-->
-            <div class="modal fade" id="modal-delete-banner" tabindex="-1"
-                aria-labelledby="modal-delete-banner-label" aria-hidden="true">
+
+            {{-- INICIO - MODAL ATIVAR/DESATIVA BANNER  --}}
+            <div class="modal fade" id="modal-status-banner" tabindex="-1"
+                aria-labelledby="modal-status-banner-label" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modal-delete-banner-label">Deletar banner</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="mb-0">
-                                Tem certeza de que deseja excluir este banner? <br>
-                                Todo o conteúdo pertencente à conta será transferido
-                                para o administrador do site. Esta ação não pode ser desfeita.
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                Cancelar
-                            </button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                Deletar banner
-                            </button>
-                        </div>
+
+                        <form id="form-status-banner" method="POST">
+                            @csrf
+                            @method('PATCH')
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal-status-banner-titulo">Alterar Status do banner</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <p class="mb-0" id="modal-status-banner-txt">
+
+                                </p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Cancelar
+                                </button>
+
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                    id="btn-status-banner">
+                                    Confirmar
+                                </button>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
             </div>
-            <!--end::Delete banner Modal-->
+            {{-- FIM - MODAL ATIVAR/DESATIVA BANNER  --}}
 
 
 
@@ -424,6 +466,7 @@
 </script>
 
 
+{{-- Editar banner --}}
 <script>
     const modalEditarBanner = document.getElementById('modal-edit-banner');
     const formEditBanner = document.getElementById('form-edit-banner');
@@ -470,6 +513,48 @@
         }
 
     });
+</script>
 
 
+{{-- Ativar e Desativar Banner --}}
+<script>
+    const modalStatusBanner = document.getElementById('modal-status-banner');
+    const formStatusBanner = document.getElementById('form-status-banner');
+    const tituloStatusBanner = document.getElementById('modal-status-banner-titulo');
+    const txtStatusBanner = document.getElementById('modal-status-banner-txt');
+    const btnStatusBanner = document.getElementById('btn-status-banner');
+
+
+    modalStatusBanner.addEventListener('show.bs.modal', function(event) {
+
+        const botao = event.relatedTarget;
+
+
+        const url = botao.getAttribute('data-url');
+        const titulo = botao.getAttribute('data-titulo');
+        const status = botao.getAttribute('data-status');
+
+
+        formStatusBanner.action = url;
+
+
+        if (status === 'ATIVO') {
+
+            tituloStatusBanner.textContent = 'Desativar Status Banner';
+            txtStatusBanner.textContent = 'Tem certeza de que deseja desativar o status do banner?';
+            btnStatusBanner.textContent = 'Desativar';
+
+            btnStatusBanner.className = 'btn btn-danger'
+
+        } else {
+
+            tituloStatusBanner.textContent = 'Ativar Status Banner';
+            txtStatusBanner.textContent = 'Tem certeza de que deseja Ativar o status do banner?';
+            btnStatusBanner.textContent = 'Ativar';
+
+            btnStatusBanner.className = 'btn btn-success'
+
+        }
+
+    });
 </script>
