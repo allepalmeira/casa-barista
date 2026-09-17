@@ -558,3 +558,26 @@
 
     });
 </script>
+
+
+{{-- Time para o alerta --}}
+<script>
+
+
+    setTimeout(() => {
+
+        const alertas = document.querySelectorAll('.alert');
+
+        alertas.forEach(function(alerta){
+
+            const instancia = bootstrap.Alert.getOrCreateInstance(alerta);
+
+            instancia.close();
+
+        });
+
+        
+    }, 5000);
+
+
+</script>
