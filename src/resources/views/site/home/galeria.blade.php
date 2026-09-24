@@ -4,18 +4,14 @@
                 <h3>Momentos que traduzem nosso propósito</h3>
             </header>
 
+            {{-- Imagens ativas da Galeria do dashboard.
+                 A lista é repetida porque o carrossel mostra 6 de uma vez
+                 e só gira quando existem mais imagens do que isso. --}}
             <div class="itensGaleria">
-                <img src="{{ asset('barista/img/galeria01.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('barista/img/galeria02.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('barista/img/galeria03.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('barista/img/galeria04.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('barista/img/galeria05.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('barista/img/galeria06.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('barista/img/galeria01.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('barista/img/galeria02.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('barista/img/galeria03.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('barista/img/galeria04.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('barista/img/galeria05.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('barista/img/galeria06.png') }}" alt="Galeria - Casa do Barista">
+                @for ($volta = 0; $volta < 2; $volta++)
+                    @foreach ($listaGaleria as $linha)
+                        <img src="{{ asset('barista/img/' . $linha->imagem_galeria) }}" alt="{{ $linha->nome_galeria }} - Casa do Barista">
+                    @endforeach
+                @endfor
             </div>
         </section>

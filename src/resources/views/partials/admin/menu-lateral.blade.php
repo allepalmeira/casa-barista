@@ -2,7 +2,7 @@
         <!--begin::Sidebar Brand-->
         <div class="sidebar-brand">
           <!--begin::Brand Link-->
-          <a href="./index.html" class="brand-link">
+          <a href="{{ route('dashboard') }}" class="brand-link">
             <!--begin::Brand Image-->
             <img
               src="{{ asset('barista/img/logo-casa-do-barista.svg') }}"
@@ -50,24 +50,36 @@
               </li>
               <li class="nav-header">VENDAS</li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('admin.venda.index') }}" class="nav-link">
                     <i class="nav-icon bi bi-circle-fill"></i>
                     <p>Vendas</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('admin.local.index') }}" class="nav-link">
+                    <i class="nav-icon bi bi-circle-fill"></i>
+                    <p class="text">Locais / QR Code</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('admin.cliente.index') }}" class="nav-link">
                     <i class="nav-icon bi bi-circle-fill"></i>
                     <p class="text">Clientes</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('admin.usuario.index') }}" class="nav-link">
                     <i class="nav-icon bi bi-circle-fill"></i>
                     <p class="text">Usuários</p>
                   </a>
                 </li>
               <li class="nav-header">SITE</li>
+              <li class="nav-item">
+                <a href="{{ route('admin.mensagem.index') }}" class="nav-link">
+                  <i class="nav-icon bi bi-circle-fill"></i>
+                  <p>Mensagens</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="{{ route('admin.banner.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill"></i>
@@ -83,7 +95,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.equipe.index') }}" class="nav-link">
+                  <i class="nav-icon bi bi-circle-fill"></i>
+                  <p>Equipe</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.depoimento.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill"></i>
                   <p>
                     Depoimentos                    
@@ -91,13 +109,13 @@
                 </a>                
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.linha-tempo.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill"></i>
                   <p>Linha do tempo</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.newsletter.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill"></i>
                   <p>
                     Newsletter                    
@@ -106,17 +124,6 @@
               </li>              
             </ul>
             <!--end::Sidebar Menu-->
-
-            <!-- Docs CTA (bottom of sidebar) -->
-            <div class="p-3 mt-3 border-top border-secondary border-opacity-25">
-              <a
-                href="./docs/introduction.html"
-                class="btn btn-sm btn-outline-light w-100 d-flex align-items-center justify-content-center gap-2"
-              >
-                <i class="bi bi-book" aria-hidden="true"></i>
-                View documentation
-              </a>
-            </div>
           </nav>
         </div>
         <!--end::Sidebar Wrapper-->

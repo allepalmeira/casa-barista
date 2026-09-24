@@ -18,6 +18,23 @@
               </div>
             </div>
             <!--end::Row-->
+
+            {{-- ALERTAS SUCESSO --}}
+            @if (session('sucesso'))
+              <div class="alert alert-success" role="alert">
+                <i class="bi bi-check-circle-fill"></i>
+                {{ session('sucesso') }}
+              </div>
+            @endif
+
+            {{-- ALERTAS ERRO --}}
+            @if (session('erro'))
+              <div class="alert alert-danger" role="alert">
+                <i class="bi bi-exclamation-circle-fill"></i>
+                {{ session('erro') }}
+              </div>
+            @endif
+
           </div>
           <!--end::Container-->
         </div>
@@ -39,7 +56,13 @@
                         <h3 class="card-title">Categorias cadastradas</h3>
                       </div>
                       <div class="col-12 col-md-8">
-                        <div class="d-flex flex-wrap justify-content-md-end gap-2">
+                        {{-- PESQUISA E FILTRO (enviados pela URL) --}}
+                        <form
+                          action="{{ route('admin.categoria.index') }}"
+                          data-pesquisa
+                          method="GET"
+                          class="d-flex flex-wrap justify-content-md-end gap-2"
+                        >
                           <div class="input-group input-group-sm w-auto">
                             <span class="input-group-text">
                               <i class="bi bi-search" aria-hidden="true"></i>
@@ -51,16 +74,20 @@
                               placeholder="Pesquisar categorias"
                               aria-label="Pesquisar categorias"
                               style="width: 180px"
+                              name="busca"
+                              value="{{ $busca }}"
                             />
                           </div>
                           <select
                             id="categoria-role-filter"
                             class="form-select form-select-sm w-auto"
-                            aria-label="Filter by role"
+                            aria-label="Filtrar por status"
+                            name="status"
+                            onchange="this.form.submit()"
                           >
-                            <option value="all" selected>Todos</option>
-                            <option value="ativo">Ativo</option>
-                            <option value="inativo">Inativo</option>
+                            <option value="all" @selected($status === 'all')>Todos</option>
+                            <option value="ativo" @selected($status === 'ativo')>Ativo</option>
+                            <option value="inativo" @selected($status === 'inativo')>Inativo</option>
                           </select>
                           <button
                             type="button"
@@ -71,7 +98,7 @@
                             <i class="bi bi-person-plus-fill me-1" aria-hidden="true"> </i>
                             Nova categoria
                           </button>
-                        </div>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -98,14 +125,14 @@
                             <tr>
                               {{--ID--}}
                               <td>
-                                {{$categoria->id_categoria}}                              
-                              </td>                              
+                                {{$categoria->id_categoria}}
+                              </td>
                               {{-- Nome --}}
                               <td>
                                 <span class="badge text-table">
                                   {{ $categoria->nome_categoria }}
                                 </span>
-                              </td>                              
+                              </td>
                               {{-- Status --}}
                               <td>
                                 @if($categoria->status_categoria === 'ATIVO')
@@ -121,26 +148,56 @@
                               {{-- Ações --}}
                               <td class="text-end">
                                 <div class="btn-group btn-group-sm">
+
+                                  {{-- EDITAR --}}
                                   <button
                                     type="button"
                                     class="btn btn-outline-secondary"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modal-edit-categoria"
+                                    data-nome="{{ $categoria->nome_categoria }}"
+                                    data-status="{{ $categoria->status_categoria }}"
+                                    data-url="{{ route('admin.categoria.update', $categoria->id_categoria) }}"
                                     aria-label="Editar"
                                   >
                                     <i class="bi bi-pencil" aria-hidden="true"> </i>
                                   </button>
-                                  <button
-                                    type="button"
-                                    class="btn btn-outline-danger"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modal-delete-categoria"
-                                    aria-label="Deletar"
-                                  >
-                                    <i class="bi bi-trash" aria-hidden="true"> </i>
-                                  </button>
+
+                                  {{-- ATIVAR / DESATIVAR --}}
+                                  @if($categoria->status_categoria === 'ATIVO')
+                                    <button
+                                      type="button"
+                                      class="btn btn-outline-danger"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#modal-status-categoria"
+                                      title="Desativar categoria"
+                                      data-url="{{ route('admin.categoria.status', $categoria->id_categoria) }}"
+                                      data-nome="{{ $categoria->nome_categoria }}"
+                                      data-status="ATIVO"
+                                      aria-label="Desativar"
+                                    >
+                                      <i class="bi bi-eye-fill" aria-hidden="true"> </i>
+                                    </button>
+                                  @else
+                                    <button
+                                      type="button"
+                                      class="btn btn-outline-success"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#modal-status-categoria"
+                                      title="Ativar categoria"
+                                      data-url="{{ route('admin.categoria.status', $categoria->id_categoria) }}"
+                                      data-nome="{{ $categoria->nome_categoria }}"
+                                      data-status="INATIVO"
+                                      aria-label="Ativar"
+                                    >
+                                      <i class="bi bi-eye-slash" aria-hidden="true"> </i>
+                                    </button>
+                                  @endif
+
                                 </div>
                               </td>
                             </tr>
-                          @empty  
+                          @empty
                             <tr>
                               <td
                                   colspan="5"
@@ -159,34 +216,13 @@
                   <!--begin::Card Footer-->
                   <div class="card-footer clearfix">
                     <div class="float-start pt-1 fs-7 text-body-secondary">
-                      Total de categorias: 
+                      Total de categorias:
                       <strong>
-                        {{ $categoria -> count()}}
+                        {{ $listaCategorias -> total()}}
                       </strong>
                     </div>
-                    <ul class="pagination pagination-sm m-0 float-end">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" aria-label="Previous"> &laquo; </a>
-                      </li>
-                      <li class="page-item active">
-                        <a class="page-link" href="#">1</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next"> &raquo; </a>
-                      </li>
-                    </ul>
+
+                    @include('partials.admin.paginacao', ['paginacao' => $listaCategorias])
                   </div>
                   <!--end::Card Footer-->
                 </div>
@@ -196,7 +232,7 @@
             </div>
             <!--end::Row-->
 
-            <!--begin::Add categoria Modal-->
+            {{-- INICIO - MODAL CADASTRO CATEGORIA --}}
             <div
               class="modal fade"
               id="modal-add-categoria"
@@ -206,7 +242,9 @@
             >
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <form>
+                  <form action="{{ route('admin.categoria.store') }}" method="POST">
+                    @csrf
+
                     <div class="modal-header">
                       <h5 class="modal-title" id="modal-add-categoria-label">Cadastrar nova categoria</h5>
                       <button
@@ -225,15 +263,16 @@
                           id="new-categoria-name"
                           placeholder="Café em xícara"
                           required
+                          name="nome_categoria"
                         />
-                      </div>                      
+                      </div>
                       <div class="mb-3">
                         <label for="new-categoria-role" class="form-label"> Status </label>
-                        <select id="new-categoria-role" class="form-select">
-                          <option selected>Ativo</option>
-                          <option>Inativo</option>
+                        <select id="new-categoria-role" class="form-select" name="status_categoria">
+                          <option value="ATIVO">Ativo</option>
+                          <option value="INATIVO">Inativo</option>
                         </select>
-                      </div>                      
+                      </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -245,48 +284,196 @@
                 </div>
               </div>
             </div>
-            <!--end::Add categoria Modal-->
+            {{-- FIM - MODAL CADASTRO CATEGORIA --}}
 
-            <!--begin::Delete categoria Modal-->
+
+            {{-- INICIO - MODAL EDITAR CATEGORIA --}}
             <div
               class="modal fade"
-              id="modal-delete-categoria"
+              id="modal-edit-categoria"
               tabindex="-1"
-              aria-labelledby="modal-delete-categoria-label"
+              aria-labelledby="modal-edit-categoria-label"
               aria-hidden="true"
             >
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modal-delete-categoria-label">Deletar categoria</h5>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <p class="mb-0">
-                      Tem certeza de que deseja excluir este categoria? <br>
-                      Todo o conteúdo pertencente à conta será transferido 
-                      para o administrador do site. Esta ação não pode ser desfeita.
-                    </p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                      Cancelar
-                    </button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                      Deletar categoria
-                    </button>
-                  </div>
+                  <form id="form-edit-categoria" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modal-edit-categoria-label">Editar categoria</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <label for="edit-categoria-nome" class="form-label"> Nome categoria </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="edit-categoria-nome"
+                          required
+                          name="nome_categoria"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="edit-categoria-status" class="form-label"> Status </label>
+                        <select id="edit-categoria-status" class="form-select" name="status_categoria">
+                          <option value="ATIVO">Ativo</option>
+                          <option value="INATIVO">Inativo</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                      </button>
+                      <button type="submit" class="btn btn-primary">Atualizar categoria</button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
-            <!--end::Delete categoria Modal-->
+            {{-- FIM - MODAL EDITAR CATEGORIA --}}
+
+
+            {{-- INICIO - MODAL ATIVAR/DESATIVAR CATEGORIA --}}
+            <div
+              class="modal fade"
+              id="modal-status-categoria"
+              tabindex="-1"
+              aria-labelledby="modal-status-categoria-titulo"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <form id="form-status-categoria" method="POST">
+                    @csrf
+                    @method('PATCH')
+
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modal-status-categoria-titulo">Alterar status da categoria</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="mb-0" id="modal-status-categoria-txt">
+
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                      </button>
+                      <button type="submit" class="btn btn-danger" id="btn-status-categoria">
+                        Confirmar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {{-- FIM - MODAL ATIVAR/DESATIVAR CATEGORIA --}}
+
           </div>
           <!--end::Container-->
         </div>
         <!--end::App Content-->
       </main>
+
+
+{{-- Editar categoria --}}
+<script>
+    const modalEditarCategoria = document.getElementById('modal-edit-categoria');
+    const formEditCategoria = document.getElementById('form-edit-categoria');
+    const editNome = document.getElementById('edit-categoria-nome');
+    const editStatus = document.getElementById('edit-categoria-status');
+
+    // Carregar as informações no modal
+    modalEditarCategoria.addEventListener('show.bs.modal', function(event) {
+
+        const botao = event.relatedTarget;
+
+        // Form Action
+        formEditCategoria.action = botao.getAttribute('data-url');
+
+        // Preencher
+        editNome.value = botao.getAttribute('data-nome');
+        editStatus.value = botao.getAttribute('data-status');
+
+    });
+</script>
+
+
+{{-- Ativar e Desativar Categoria --}}
+<script>
+    const modalStatusCategoria = document.getElementById('modal-status-categoria');
+    const formStatusCategoria = document.getElementById('form-status-categoria');
+    const tituloStatusCategoria = document.getElementById('modal-status-categoria-titulo');
+    const txtStatusCategoria = document.getElementById('modal-status-categoria-txt');
+    const btnStatusCategoria = document.getElementById('btn-status-categoria');
+
+
+    modalStatusCategoria.addEventListener('show.bs.modal', function(event) {
+
+        const botao = event.relatedTarget;
+
+        const url = botao.getAttribute('data-url');
+        const nome = botao.getAttribute('data-nome');
+        const status = botao.getAttribute('data-status');
+
+        formStatusCategoria.action = url;
+
+        if (status === 'ATIVO') {
+
+            tituloStatusCategoria.textContent = 'Desativar categoria';
+            txtStatusCategoria.textContent = 'Tem certeza de que deseja desativar a categoria "' + nome + '"?';
+            btnStatusCategoria.textContent = 'Desativar';
+
+            btnStatusCategoria.className = 'btn btn-danger'
+
+        } else {
+
+            tituloStatusCategoria.textContent = 'Ativar categoria';
+            txtStatusCategoria.textContent = 'Tem certeza de que deseja ativar a categoria "' + nome + '"?';
+            btnStatusCategoria.textContent = 'Ativar';
+
+            btnStatusCategoria.className = 'btn btn-success'
+
+        }
+
+    });
+</script>
+
+
+{{-- Pesquisa enquanto digita --}}
+@include('partials.admin.pesquisa')
+
+
+{{-- Time para o alerta --}}
+<script>
+
+    setTimeout(() => {
+
+        const alertas = document.querySelectorAll('.alert');
+
+        alertas.forEach(function(alerta){
+
+            const instancia = bootstrap.Alert.getOrCreateInstance(alerta);
+
+            instancia.close();
+
+        });
+
+    }, 5000);
+
+</script>

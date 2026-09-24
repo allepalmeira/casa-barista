@@ -18,6 +18,31 @@
               </div>
             </div>
             <!--end::Row-->
+
+            {{-- ALERTAS SUCESSO --}}
+            @if (session('sucesso'))
+              <div class="alert alert-success" role="alert">
+                <i class="bi bi-check-circle-fill"></i>
+                {{ session('sucesso') }}
+              </div>
+            @endif
+
+            {{-- ALERTAS ERRO --}}
+            @if (session('erro'))
+              <div class="alert alert-danger" role="alert">
+                <i class="bi bi-exclamation-circle-fill"></i>
+                {{ session('erro') }}
+              </div>
+            @endif
+
+            {{-- ALERTAS VALIDAÇÃO --}}
+            @if ($errors->any())
+              <div class="alert alert-danger" role="alert">
+                <i class="bi bi-exclamation-circle-fill"></i>
+                {{ $errors->first() }}
+              </div>
+            @endif
+
           </div>
           <!--end::Container-->
         </div>
@@ -39,7 +64,13 @@
                         <h3 class="card-title">Produtos cadastrados</h3>
                       </div>
                       <div class="col-12 col-md-8">
-                        <div class="d-flex flex-wrap justify-content-md-end gap-2">
+                        {{-- PESQUISA E FILTRO (enviados pela URL) --}}
+                        <form
+                          action="{{ route('admin.produto.index') }}"
+                          data-pesquisa
+                          method="GET"
+                          class="d-flex flex-wrap justify-content-md-end gap-2"
+                        >
                           <div class="input-group input-group-sm w-auto">
                             <span class="input-group-text">
                               <i class="bi bi-search" aria-hidden="true"></i>
@@ -51,16 +82,20 @@
                               placeholder="Pesquisar produtos"
                               aria-label="Pesquisar produtos"
                               style="width: 180px"
+                              name="busca"
+                              value="{{ $busca }}"
                             />
                           </div>
                           <select
                             id="produto-role-filter"
                             class="form-select form-select-sm w-auto"
-                            aria-label="Filter by role"
+                            aria-label="Filtrar por status"
+                            name="status"
+                            onchange="this.form.submit()"
                           >
-                            <option value="all" selected>Todos</option>
-                            <option value="ativo">Ativo</option>
-                            <option value="inativo">Inativo</option>
+                            <option value="all" @selected($status === 'all')>Todos</option>
+                            <option value="ativo" @selected($status === 'ativo')>Ativo</option>
+                            <option value="inativo" @selected($status === 'inativo')>Inativo</option>
                           </select>
                           <button
                             type="button"
@@ -71,7 +106,7 @@
                             <i class="bi bi-person-plus-fill me-1" aria-hidden="true"> </i>
                             Novo produto
                           </button>
-                        </div>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -108,7 +143,7 @@
                             <tr>
                               {{--ID--}}
                               <td>
-                                {{$produto->id_produto}}                              
+                                {{$produto->id_produto}}
                               </td>
                               {{--Imagem--}}
                               <td>
@@ -149,19 +184,19 @@
                               </td>
                               {{-- Valor --}}
                               <td>
-                                <span class="badge text-table"> R$ 
+                                <span class="badge text-table"> R$
                                   {{ number_format($produto->valor_produto, 2, ',', '.') }}
                                 </span>
                               </td>
                               {{-- Destaque --}}
                               <td>
-                                @if($produto->destaque_produto === 1)
+                                @if($produto->destaque_produto == 1)
                                   <span class="badge text-bg-success">
                                     Produto Destaque
                                   </span>
                                 @else
                                   <span class="badge text-bg-warning">
-                                    
+
                                   </span>
                                 @endif
                               </td>
@@ -180,29 +215,65 @@
                               {{-- Ações --}}
                               <td class="text-end">
                                 <div class="btn-group btn-group-sm">
+
+                                  {{-- EDITAR --}}
                                   <button
                                     type="button"
                                     class="btn btn-outline-secondary"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modal-edit-produto"
+                                    data-nome="{{ $produto->nome_produto }}"
+                                    data-categoria="{{ $produto->id_categoria }}"
+                                    data-curta="{{ $produto->descricao_curta_produto }}"
+                                    data-longa="{{ $produto->descricao_longa_produto }}"
+                                    data-valor="{{ $produto->valor_produto }}"
+                                    data-destaque="{{ $produto->destaque_produto }}"
+                                    data-status="{{ $produto->status_produto }}"
+                                    data-image="{{ asset('barista/img/' . $produto->imagem_produto) }}"
+                                    data-url="{{ route('admin.produto.update', $produto->id_produto) }}"
                                     aria-label="Editar"
                                   >
                                     <i class="bi bi-pencil" aria-hidden="true"> </i>
                                   </button>
-                                  <button
-                                    type="button"
-                                    class="btn btn-outline-danger"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modal-delete-produto"
-                                    aria-label="Deletar"
-                                  >
-                                    <i class="bi bi-trash" aria-hidden="true"> </i>
-                                  </button>
+
+                                  {{-- ATIVAR / DESATIVAR --}}
+                                  @if($produto->status_produto === 'ATIVO')
+                                    <button
+                                      type="button"
+                                      class="btn btn-outline-danger"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#modal-status-produto"
+                                      title="Desativar produto"
+                                      data-url="{{ route('admin.produto.status', $produto->id_produto) }}"
+                                      data-nome="{{ $produto->nome_produto }}"
+                                      data-status="ATIVO"
+                                      aria-label="Desativar"
+                                    >
+                                      <i class="bi bi-eye-fill" aria-hidden="true"> </i>
+                                    </button>
+                                  @else
+                                    <button
+                                      type="button"
+                                      class="btn btn-outline-success"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#modal-status-produto"
+                                      title="Ativar produto"
+                                      data-url="{{ route('admin.produto.status', $produto->id_produto) }}"
+                                      data-nome="{{ $produto->nome_produto }}"
+                                      data-status="INATIVO"
+                                      aria-label="Ativar"
+                                    >
+                                      <i class="bi bi-eye-slash" aria-hidden="true"> </i>
+                                    </button>
+                                  @endif
+
                                 </div>
                               </td>
                             </tr>
-                          @empty  
+                          @empty
                             <tr>
                               <td
-                                  colspan="5"
+                                  colspan="9"
                                   class="text-center py-4 text-muted"
                               >
                                   Nenhum produto cadastrado.
@@ -218,34 +289,13 @@
                   <!--begin::Card Footer-->
                   <div class="card-footer clearfix">
                     <div class="float-start pt-1 fs-7 text-body-secondary">
-                      Total de produtos: 
+                      Total de produtos:
                       <strong>
-                        {{ $produto -> count()}}
+                        {{ $listaProdutos -> total()}}
                       </strong>
                     </div>
-                    <ul class="pagination pagination-sm m-0 float-end">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" aria-label="Previous"> &laquo; </a>
-                      </li>
-                      <li class="page-item active">
-                        <a class="page-link" href="#">1</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next"> &raquo; </a>
-                      </li>
-                    </ul>
+
+                    @include('partials.admin.paginacao', ['paginacao' => $listaProdutos])
                   </div>
                   <!--end::Card Footer-->
                 </div>
@@ -255,7 +305,7 @@
             </div>
             <!--end::Row-->
 
-            <!--begin::Add produto Modal-->
+            {{-- INICIO - MODAL CADASTRO PRODUTO --}}
             <div
               class="modal fade"
               id="modal-add-produto"
@@ -265,7 +315,9 @@
             >
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <form>
+                  <form action="{{ route('admin.produto.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
                     <div class="modal-header">
                       <h5 class="modal-title" id="modal-add-produto-label">Cadastrar novo produto</h5>
                       <button
@@ -277,57 +329,95 @@
                     </div>
                     <div class="modal-body">
                       <div class="mb-3">
-                        <label for="new-produto-name" class="form-label"> Nome Produto </label>
+                        <label for="new-produto-nome" class="form-label"> Nome Produto </label>
                         <input
                           type="text"
                           class="form-control"
-                          id="new-produto-name"
+                          id="new-produto-nome"
                           placeholder="Café em xícara"
+                          maxlength="30"
                           required
+                          name="nome_produto"
+                          value="{{ old('nome_produto') }}"
                         />
                       </div>
                       <div class="mb-3">
-                        <label for="new-produto-role" class="form-label"> Categoria </label>
-                        <select id="new-produto-role" class="form-select">
-                          <option selected>CAFÉ</option>
-                          <option>PROMOÇÃO</option>
+                        <label for="new-produto-categoria" class="form-label"> Categoria </label>
+                        <select id="new-produto-categoria" class="form-select" name="id_categoria">
+                          @foreach($listaCategorias as $categoria)
+                            <option value="{{ $categoria->id_categoria }}">{{ $categoria->nome_categoria }}</option>
+                          @endforeach
                         </select>
                       </div>
                       <div class="mb-3">
-                        <label for="new-produto-name" class="form-label"> Descrição curta </label>
+                        <label for="new-produto-curta" class="form-label"> Descrição curta </label>
                         <input
                           type="text"
                           class="form-control"
-                          id="new-produto-name"
+                          id="new-produto-curta"
                           placeholder="Café em xícara"
+                          maxlength="100"
                           required
+                          name="descricao_curta_produto"
+                          value="{{ old('descricao_curta_produto') }}"
                         />
                       </div>
                       <div class="mb-3">
-                        <label for="new-produto-name" class="form-label"> Descrição Longa </label>
+                        <label for="new-produto-longa" class="form-label"> Descrição Longa </label>
                         <textarea
-                          type="text"
                           class="form-control"
-                          id="new-produto-name"
+                          id="new-produto-longa"
                           placeholder="Café em xícara"
-                          required
-                        >
-                        </textarea>
-                      </div>
-                      <div class="mb-3">                        
-                        <label for="new-produto-role" class="form-label"> Selecione uma imagem </label>
-                        <div class="input-group">
-                          <input type="file" class="form-control" id="inputGroupFile02" />
-                          <label class="input-group-text" for="inputGroupFile02">Carregar...</label>
-                        </div>
+                          name="descricao_longa_produto"
+                        >{{ old('descricao_longa_produto') }}</textarea>
                       </div>
                       <div class="mb-3">
-                        <label for="new-produto-role" class="form-label"> Status </label>
-                        <select id="new-produto-role" class="form-select">
-                          <option selected>Ativo</option>
-                          <option>Inativo</option>
+                        <label for="new-produto-valor" class="form-label"> Valor (R$) </label>
+                        <input
+                          type="number"
+                          step="0.01"
+                          min="0"
+                          class="form-control"
+                          id="new-produto-valor"
+                          placeholder="9.90"
+                          required
+                          name="valor_produto"
+                          value="{{ old('valor_produto') }}"
+                        />
+                      </div>
+                      <div class="mb-3">
+
+                        <label for="img-produto" class="form-label"> Selecione uma imagem </label>
+                        <input type="file" class="form-control input-banner" id="img-produto"
+                          name="imagem_produto" accept="image/*" required />
+
+                        <label for="img-produto" class="banner-upload">
+
+                          <img id="ver-produto" src="{{ asset('admin/assets/img/sem-banner.svg') }}"
+                            alt="Selecione uma imagem para o produto">
+
+                          <div class="banner-upload">
+                            <i class="bi bi-image"></i>
+                            <span>Clique para selecionar a imagem</span>
+                          </div>
+
+                        </label>
+
+                      </div>
+                      <div class="mb-3">
+                        <label for="new-produto-destaque" class="form-label"> Destaque </label>
+                        <select id="new-produto-destaque" class="form-select" name="destaque_produto">
+                          <option value="0">Não</option>
+                          <option value="1">Sim</option>
                         </select>
-                      </div>                      
+                      </div>
+                      <div class="mb-3">
+                        <label for="new-produto-status" class="form-label"> Status </label>
+                        <select id="new-produto-status" class="form-select" name="status_produto">
+                          <option value="ATIVO">Ativo</option>
+                          <option value="INATIVO">Inativo</option>
+                        </select>
+                      </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -339,48 +429,287 @@
                 </div>
               </div>
             </div>
-            <!--end::Add produto Modal-->
+            {{-- FIM - MODAL CADASTRO PRODUTO --}}
 
-            <!--begin::Delete produto Modal-->
+
+            {{-- INICIO - MODAL EDITAR PRODUTO --}}
             <div
               class="modal fade"
-              id="modal-delete-produto"
+              id="modal-edit-produto"
               tabindex="-1"
-              aria-labelledby="modal-delete-produto-label"
+              aria-labelledby="modal-edit-produto-label"
               aria-hidden="true"
             >
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modal-delete-produto-label">Deletar produto</h5>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <p class="mb-0">
-                      Tem certeza de que deseja excluir este produto? <br>
-                      Todo o conteúdo pertencente à conta será transferido 
-                      para o administrador do site. Esta ação não pode ser desfeita.
-                    </p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                      Cancelar
-                    </button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                      Deletar produto
-                    </button>
-                  </div>
+                  <form id="form-edit-produto" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modal-edit-produto-label">Editar produto</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <label for="edit-produto-nome" class="form-label"> Nome Produto </label>
+                        <input type="text" class="form-control" id="edit-produto-nome" maxlength="30"
+                          required name="nome_produto" />
+                      </div>
+                      <div class="mb-3">
+                        <label for="edit-produto-categoria" class="form-label"> Categoria </label>
+                        <select id="edit-produto-categoria" class="form-select" name="id_categoria">
+                          @foreach($listaCategorias as $categoria)
+                            <option value="{{ $categoria->id_categoria }}">{{ $categoria->nome_categoria }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="edit-produto-curta" class="form-label"> Descrição curta </label>
+                        <input type="text" class="form-control" id="edit-produto-curta" maxlength="100"
+                          required name="descricao_curta_produto" />
+                      </div>
+                      <div class="mb-3">
+                        <label for="edit-produto-longa" class="form-label"> Descrição Longa </label>
+                        <textarea class="form-control" id="edit-produto-longa"
+                          name="descricao_longa_produto"></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="edit-produto-valor" class="form-label"> Valor (R$) </label>
+                        <input type="number" step="0.01" min="0" class="form-control" id="edit-produto-valor"
+                          required name="valor_produto" />
+                      </div>
+                      <div class="mb-3">
+
+                        <label for="edit-produto-imagem" class="form-label"> Selecione uma imagem </label>
+
+                        <input type="file" class="form-control input-banner" id="edit-produto-imagem"
+                          name="imagem_produto" accept="image/*" />
+
+                        <label for="edit-produto-imagem" class="banner-upload">
+
+                          <img id="edit-produto-mostrar" src="" alt="produto">
+
+                          <div class="banner-upload">
+                            <i class="bi bi-image"></i>
+                            <span>Deixe vazio para manter a imagem atual</span>
+                          </div>
+
+                        </label>
+
+                      </div>
+                      <div class="mb-3">
+                        <label for="edit-produto-destaque" class="form-label"> Destaque </label>
+                        <select id="edit-produto-destaque" class="form-select" name="destaque_produto">
+                          <option value="0">Não</option>
+                          <option value="1">Sim</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="edit-produto-status" class="form-label"> Status </label>
+                        <select id="edit-produto-status" class="form-select" name="status_produto">
+                          <option value="ATIVO">Ativo</option>
+                          <option value="INATIVO">Inativo</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                      </button>
+                      <button type="submit" class="btn btn-primary">Atualizar produto</button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
-            <!--end::Delete produto Modal-->
+            {{-- FIM - MODAL EDITAR PRODUTO --}}
+
+
+            {{-- INICIO - MODAL ATIVAR/DESATIVAR PRODUTO --}}
+            <div
+              class="modal fade"
+              id="modal-status-produto"
+              tabindex="-1"
+              aria-labelledby="modal-status-produto-titulo"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <form id="form-status-produto" method="POST">
+                    @csrf
+                    @method('PATCH')
+
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modal-status-produto-titulo">Alterar status do produto</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="mb-0" id="modal-status-produto-txt">
+
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                      </button>
+                      <button type="submit" class="btn btn-danger" id="btn-status-produto">
+                        Confirmar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {{-- FIM - MODAL ATIVAR/DESATIVAR PRODUTO --}}
+
           </div>
           <!--end::Container-->
         </div>
         <!--end::App Content-->
       </main>
+
+
+{{-- Carregando a foto do modal cadastrar --}}
+<script>
+    const inputProduto = document.getElementById('img-produto');
+    const previewProduto = document.getElementById('ver-produto');
+
+    inputProduto.addEventListener('change', function() {
+
+        const arquivo = this.files[0];
+
+        if (arquivo) {
+
+            previewProduto.src = URL.createObjectURL(arquivo);
+
+        }
+
+    });
+</script>
+
+
+{{-- Editar produto --}}
+<script>
+    const modalEditarProduto = document.getElementById('modal-edit-produto');
+    const formEditProduto = document.getElementById('form-edit-produto');
+    const editNome = document.getElementById('edit-produto-nome');
+    const editCategoria = document.getElementById('edit-produto-categoria');
+    const editCurta = document.getElementById('edit-produto-curta');
+    const editLonga = document.getElementById('edit-produto-longa');
+    const editValor = document.getElementById('edit-produto-valor');
+    const editDestaque = document.getElementById('edit-produto-destaque');
+    const editStatus = document.getElementById('edit-produto-status');
+    const editImagem = document.getElementById('edit-produto-imagem');
+    const editMostrar = document.getElementById('edit-produto-mostrar');
+
+    // Carregar as informações no modal
+    modalEditarProduto.addEventListener('show.bs.modal', function(event) {
+
+        const botao = event.relatedTarget;
+
+        // Form Action
+        formEditProduto.action = botao.getAttribute('data-url');
+
+        // Preencher
+        editNome.value = botao.getAttribute('data-nome');
+        editCategoria.value = botao.getAttribute('data-categoria');
+        editCurta.value = botao.getAttribute('data-curta');
+        editLonga.value = botao.getAttribute('data-longa');
+        editValor.value = botao.getAttribute('data-valor');
+        editDestaque.value = botao.getAttribute('data-destaque');
+        editStatus.value = botao.getAttribute('data-status');
+        editMostrar.src = botao.getAttribute('data-image');
+
+        editImagem.value = '';
+
+    });
+
+    // VER FOTO PARA EDITAR
+    editImagem.addEventListener('change', function() {
+
+        const arquivo = this.files[0];
+
+        if (arquivo) {
+
+            editMostrar.src = URL.createObjectURL(arquivo);
+
+        }
+
+    });
+</script>
+
+
+{{-- Ativar e Desativar Produto --}}
+<script>
+    const modalStatusProduto = document.getElementById('modal-status-produto');
+    const formStatusProduto = document.getElementById('form-status-produto');
+    const tituloStatusProduto = document.getElementById('modal-status-produto-titulo');
+    const txtStatusProduto = document.getElementById('modal-status-produto-txt');
+    const btnStatusProduto = document.getElementById('btn-status-produto');
+
+
+    modalStatusProduto.addEventListener('show.bs.modal', function(event) {
+
+        const botao = event.relatedTarget;
+
+        const url = botao.getAttribute('data-url');
+        const nome = botao.getAttribute('data-nome');
+        const status = botao.getAttribute('data-status');
+
+        formStatusProduto.action = url;
+
+        if (status === 'ATIVO') {
+
+            tituloStatusProduto.textContent = 'Desativar produto';
+            txtStatusProduto.textContent = 'Tem certeza de que deseja desativar o produto "' + nome + '"?';
+            btnStatusProduto.textContent = 'Desativar';
+
+            btnStatusProduto.className = 'btn btn-danger'
+
+        } else {
+
+            tituloStatusProduto.textContent = 'Ativar produto';
+            txtStatusProduto.textContent = 'Tem certeza de que deseja ativar o produto "' + nome + '"?';
+            btnStatusProduto.textContent = 'Ativar';
+
+            btnStatusProduto.className = 'btn btn-success'
+
+        }
+
+    });
+</script>
+
+
+{{-- Pesquisa enquanto digita --}}
+@include('partials.admin.pesquisa')
+
+
+{{-- Time para o alerta --}}
+<script>
+
+    setTimeout(() => {
+
+        const alertas = document.querySelectorAll('.alert');
+
+        alertas.forEach(function(alerta){
+
+            const instancia = bootstrap.Alert.getOrCreateInstance(alerta);
+
+            instancia.close();
+
+        });
+
+    }, 5000);
+
+</script>

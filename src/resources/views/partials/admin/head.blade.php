@@ -103,8 +103,8 @@
     <!-- apexcharts -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"
-      integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0="
+      href="https://cdn.jsdelivr.net/npm/apexcharts@3.54.1/dist/apexcharts.css"
+      integrity="sha256-NzrC6qvHx3kAL2SpVls966ZFfpr61srg1jX1uwbfhZY="
       crossorigin="anonymous"
     />
 

@@ -62,36 +62,57 @@
                 </div>
 
                 <!-- FORM -->
-                <div class="contato-form">
+                <div class="contato-form" id="formulario">
 
-                    <form action="{{ route('contato') }}" method="POST">
+                    {{-- Retorno do envio (a mensagem chega no dashboard em "Mensagens") --}}
+                    @if (session('sucesso'))
+                        <p class="aviso-form aviso-sucesso" role="status">{{ session('sucesso') }}</p>
+                    @endif
+
+                    @if (session('erro'))
+                        <p class="aviso-form aviso-erro" role="alert">{{ session('erro') }}</p>
+                    @endif
+
+                    @if ($errors->any())
+                        <p class="aviso-form aviso-erro" role="alert">{{ $errors->first() }}</p>
+                    @endif
+
+                    <form action="{{ route('contato.store') }}" method="POST">
+
                         <div>
-                            <input type="text" name="nome" placeholder="Nome Completo*: " required>
+                            <input type="text" name="nome" placeholder="Nome Completo*: " maxlength="50" required
+                                value="{{ old('nome') }}">
                         </div>
                         <div>
-                            <input type="email" name="email" placeholder="E-mail*: " required>
+                            <input type="email" name="email" placeholder="E-mail*: " maxlength="80" required
+                                value="{{ old('email') }}">
                         </div>
 
                         <div>
                             <div>
-                                <input type="tel" name="fone" placeholder="Telefone: ">
+                                <input type="tel" name="fone" placeholder="Telefone: " maxlength="14"
+                                    value="{{ old('fone') }}">
                             </div>
                             <div>
-                                <select name="assunto">
-                                    <option value="" disabled selected hidden>Selecione o assunto</option>
-                                    <option value="Eventos">Eventos</option>
-                                    <option value="Café">Café</option>
+                                <select name="assunto" required>
+                                    <option value="" disabled @selected(!old('assunto')) hidden>Selecione o assunto</option>
+                                    @foreach ($assuntos as $assunto)
+                                        <option value="{{ $assunto }}" @selected(old('assunto') === $assunto)>{{ $assunto }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
 
                         <div>
-                            <textarea name="mens" cols="30" rows="10" placeholder="Digite sua mensagem" required></textarea>
+                            <textarea name="mens" cols="30" rows="10" placeholder="Digite sua mensagem" maxlength="2000" required>{{ old('mens') }}</textarea>
                         </div>
                         <div>
                             <button class="btn" type="submit">Enviar Mensagem</button>
                             <button class="btn" type="reset">Limpar</button>
                         </div>
+
+                        {{-- Token no final: o CSS do formulário usa a posição dos campos (nth-child) --}}
+                        @csrf
 
                     </form>
 

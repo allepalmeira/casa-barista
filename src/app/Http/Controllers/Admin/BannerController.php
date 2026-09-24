@@ -12,11 +12,29 @@ use Illuminate\Support\Str;
 
 class BannerController extends Controller
 {
-    // Listar todos os banners cadastrados: R    
-    public function index()
+    // Listar todos os banners cadastrados: R
+    public function index(Request $request)
     {
-        $listaBanner = Banner::orderByDesc('id_banner')->get();
-        return view('admin.banner.index', compact('listaBanner'));
+        // Valores da pesquisa e do filtro (vindos da URL)
+        $busca = $request->input('busca');
+        $status = $request->input('status', 'all');
+
+        $consulta = Banner::orderByDesc('id_banner');
+
+        // Pesquisar pelo título
+        if ($busca) {
+            $consulta->where('titulo_banner', 'like', '%' . $busca . '%');
+        }
+
+        // Filtrar pelo status (ativo / inativo)
+        if (in_array($status, ['ativo', 'inativo'])) {
+            $consulta->where('status_banner', strtoupper($status));
+        }
+
+        // 5 por página, mantendo a pesquisa e o filtro nos links das páginas
+        $listaBanner = $consulta->paginate(5)->withQueryString();
+
+        return view('admin.banner.index', compact('listaBanner', 'busca', 'status'));
     }
     
     // CADASTRAR BANNER: C
