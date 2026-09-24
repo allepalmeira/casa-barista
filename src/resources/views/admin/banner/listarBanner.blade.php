@@ -57,27 +57,30 @@
                                     <h3 class="card-title">Banners cadastrados</h3>
                                 </div>
                                 <div class="col-12 col-md-8">
-                                    <div class="d-flex flex-wrap justify-content-md-end gap-2">
+                                    {{-- PESQUISA E FILTRO (enviados pela URL) --}}
+                                    <form action="{{ route('admin.banner.index') }}" method="GET" data-pesquisa
+                                        class="d-flex flex-wrap justify-content-md-end gap-2">
                                         <div class="input-group input-group-sm w-auto">
                                             <span class="input-group-text">
                                                 <i class="bi bi-search" aria-hidden="true"></i>
                                             </span>
                                             <input type="search" id="banner-search" class="form-control"
                                                 placeholder="Pesquisar banners" aria-label="Pesquisar banners"
-                                                style="width: 180px" />
+                                                style="width: 180px" name="busca" value="{{ $busca }}" />
                                         </div>
                                         <select id="banner-role-filter" class="form-select form-select-sm w-auto"
-                                            aria-label="Filter by role">
-                                            <option value="all" selected>Todos</option>
-                                            <option value="ativo">Ativo</option>
-                                            <option value="inativo">Inativo</option>
+                                            aria-label="Filtrar por status" name="status"
+                                            onchange="this.form.submit()">
+                                            <option value="all" @selected($status === 'all')>Todos</option>
+                                            <option value="ativo" @selected($status === 'ativo')>Ativo</option>
+                                            <option value="inativo" @selected($status === 'inativo')>Inativo</option>
                                         </select>
                                         <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#modal-add-banner">
                                             <i class="bi bi-person-plus-fill me-1" aria-hidden="true"> </i>
                                             Novo banner
                                         </button>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -221,32 +224,11 @@
                             <div class="float-start pt-1 fs-7 text-body-secondary">
                                 Total de banners:
                                 <strong>
-                                    {{ $listaBanner->count() }}
+                                    {{ $listaBanner->total() }}
                                 </strong>
                             </div>
-                            <ul class="pagination pagination-sm m-0 float-end">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" aria-label="Previous"> &laquo; </a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">4</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">5</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next"> &raquo; </a>
-                                </li>
-                            </ul>
+
+                            @include('partials.admin.paginacao', ['paginacao' => $listaBanner])
                         </div>
                         <!--end::Card Footer-->
                     </div>
@@ -558,6 +540,10 @@
 
     });
 </script>
+
+
+{{-- Pesquisa enquanto digita --}}
+@include('partials.admin.pesquisa')
 
 
 {{-- Time para o alerta --}}

@@ -1250,3 +1250,86 @@ p {
     background-color: #a65d2e;
     border-color: #a65d2e;
 }
+
+/*
+======================================
+CONTEÚDO VINDO DO DASHBOARD
+======================================
+*/
+
+/* Destaque: fotos de produto (1920x740) no tamanho do layout */
+.destaque article img {
+  width: 240px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Galeria: fotos quadradas no carrossel */
+.itensGaleria img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* Retorno dos formulários (contato e newsletter) */
+.aviso-form {
+  margin-bottom: 15px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-family: var(--fonte-texto);
+  font-size: 20px;
+}
+
+.aviso-sucesso {
+  background-color: #dfe6d3;
+  color: #3b4a2a;
+}
+
+.aviso-erro {
+  background-color: #f6dcd3;
+  color: #7a2e12;
+}
+
+/* Aviso da newsletter: abaixo do campo, sem herdar o margin-top negativo de ".box-email p" */
+.box-email .aviso-form {
+  box-sizing: border-box;
+  width: 420px;
+  margin: 12px 0 20px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.box-email .aviso-sucesso {
+  color: #3b4a2a;
+}
+
+.box-email .aviso-erro {
+  color: #7a2e12;
+}
+
+/* Equipe em carrossel (mais de 3 pessoas): o slick controla a largura, cada card fica centralizado */
+.cardEquipe.slideEquipe {
+  display: block;
+}
+
+/* Cada card é um slide (o slick define a largura); a margem cria o espaço entre eles */
+.slideEquipe .slick-slide {
+  margin: 50px 20px 0;
+}
+
+.slideEquipe .slick-list {
+  margin: 0 -20px;
+}
+
+.slideEquipe article img {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Fotos enviadas pelo dashboard no mesmo tamanho das originais */
+.equipe article img {
+  width: 190px;
+  height: 220px;
+  object-fit: cover;
+}

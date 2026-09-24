@@ -11,14 +11,14 @@
             <button class="fechar-menu"></button>
             <ul>
                 <li>
-                    <a class="menu-ativo" href="{{ route('home') }}">Home</a>
+                    <a class="{{ request()->routeIs('home') ? 'menu-ativo' : '' }}" href="{{ route('home') }}">Home</a>
                 </li>
                 <li>
-                    <a class="" href="{{ route('sobre') }}">Sobre</a>
+                    <a class="{{ request()->routeIs('sobre') ? 'menu-ativo' : '' }}" href="{{ route('sobre') }}">Sobre</a>
                 </li>
 
                 <li class="item-submenu">
-                    <a class="" href="{{ route('cardapio') }}">Cardápio</a>
+                    <a class="{{ request()->routeIs('cardapio*') ? 'menu-ativo' : '' }}" href="{{ route('cardapio') }}">Cardápio</a>
 
                     <!-- SUB MENU -->
                     <ul class="submenu">
@@ -32,18 +32,24 @@
                 </li> <!-- Fim Cardápio -->
 
                 <li>
-                    <a class="" href="{{ route('evento') }}">Eventos</a>
+                    <a class="{{ request()->routeIs('evento') ? 'menu-ativo' : '' }}" href="{{ route('evento') }}">Eventos</a>
                 </li>
                 <li>
-                    <a class="" href="{{ route('contato') }}">Contato</a>
+                    <a class="{{ request()->routeIs('contato') ? 'menu-ativo' : '' }}" href="{{ route('contato') }}">Contato</a>
                 </li>
             </ul>
 
             <div>
-                <!-- LOGIN -->
-                <a href="#" class="login">
-                    <img src="{{ asset('barista/img/login.png') }}" alt="Login Casa do Barista">
-                </a>
+                <!-- LOGIN (já logado: vai direto para o dashboard) -->
+                @auth
+                    <a href="{{ route('dashboard') }}" class="login" title="Área administrativa">
+                        <img src="{{ asset('barista/img/login.png') }}" alt="Área administrativa Casa do Barista">
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="login" title="Entrar">
+                        <img src="{{ asset('barista/img/login.png') }}" alt="Login Casa do Barista">
+                    </a>
+                @endauth
 
                 <!-- Rede Social  | ul>li*3>a>img -->
                 <ul class="redeSocial">

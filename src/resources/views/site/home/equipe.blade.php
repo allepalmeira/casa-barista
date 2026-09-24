@@ -4,24 +4,16 @@
         <h3>O café é feito por pessoas</h3>
     </header>
 
-    <div class="site cardEquipe  wow animate__animated animate__fadeInUp">
+    {{-- Equipe cadastrada no dashboard. Até 3 pessoas: cards lado a lado;
+         mais que isso vira carrossel (slideEquipe, configurado no script.js) --}}
+    <div class="site cardEquipe {{ $listaEquipe->count() > 3 ? 'slideEquipe' : '' }}  wow animate__animated animate__fadeInUp">
+        @foreach ($listaEquipe as $linha)
         <article>
-            <img src="{{ asset('barista/img/barista1.png') }}" alt="Lucas Ribeiro - Barista Especialista">
-            <h4>Lucas Ribeiro</h4>
-            <h5>Barista Especialista</h5>
+            <img src="{{ asset('barista/img/' . $linha->foto_equipe) }}" alt="{{ $linha->nome_equipe }} - {{ $linha->cargo_equipe }}">
+            <h4>{{ $linha->nome_equipe }}</h4>
+            <h5>{{ $linha->cargo_equipe }}</h5>
         </article>
-
-        <article>
-            <img src="{{ asset('barista/img/barista2.png') }}" alt="Mariana Alves - Mestre de Torr">
-            <h4>Mariana Alves</h4>
-            <h5>Mestre de Torra</h5>
-        </article>
-
-        <article>
-            <img src="{{ asset('barista/img/barista3.png') }}" alt="Renato Silva - Atendimento e Experiência do Cliente">
-            <h4>Renato Silva</h4>
-            <h5>Atendimento e Experiência do Cliente</h5>
-        </article>
+        @endforeach
     </div>
 
 </section>

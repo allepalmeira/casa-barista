@@ -5,7 +5,7 @@
   <div class="col-sm-6">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb float-sm-end">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
       </ol>
     </nav>
@@ -32,7 +32,7 @@
         ></path>
       </svg>
       <a
-        href="#"
+        href="{{ route('admin.cliente.index') }}"
         class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
       >
         Mais informações <i class="bi bi-link-45deg"></i>
@@ -60,7 +60,7 @@
         ></path>
       </svg>
       <a
-        href="#"
+        href="{{ route('admin.produto.index') }}"
         class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
       >
         Mais informações <i class="bi bi-link-45deg"></i>
@@ -88,7 +88,7 @@
         ></path>
       </svg>
       <a
-        href="#"
+        href="{{ route('admin.produto.index') }}"
         class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
       >
         Mais informações <i class="bi bi-link-45deg"></i>
@@ -123,7 +123,7 @@
         ></path>
       </svg>
       <a
-        href="#"
+        href="{{ route('admin.venda.index') }}"
         class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
       >
         Mais informações <i class="bi bi-link-45deg"></i>

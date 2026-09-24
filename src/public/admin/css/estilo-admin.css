@@ -62,3 +62,251 @@
     display: none;
 }
 
+.login-body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            rgba(10, 10, 10, 0.92),
+            rgba(10, 10, 10, 0.96)
+        ),
+        #111;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.login-container {
+    width: 100%;
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+
+    background: #f4e9da;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45);
+
+    padding: 40px;
+}
+
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+.login-logo img {
+    max-width: 170px;
+}
+
+
+.login-header {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.login-header h1 {
+    margin: 0 0 8px;
+
+    color: #4b2b1b;
+
+    font-size: 28px;
+}
+
+
+.login-header p {
+    margin: 0;
+
+    color: #866046;
+
+    font-size: 14px;
+}
+
+
+.login-group {
+    margin-bottom: 20px;
+}
+
+
+.login-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #4b2b1b;
+
+    font-weight: 600;
+
+    font-size: 13px;
+}
+
+
+.login-group input {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px 15px;
+
+    border: 1px solid #c6a386;
+
+    border-radius: 5px;
+
+    background: #fff;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+
+.login-group input:focus {
+    border-color: #bd692d;
+
+    box-shadow:
+        0 0 0 3px rgba(189, 105, 45, 0.12);
+}
+
+
+.login-options {
+    margin-bottom: 22px;
+
+    color: #745039;
+
+    font-size: 13px;
+}
+
+
+.login-button {
+    width: 100%;
+
+    border: 0;
+
+    padding: 14px;
+
+    border-radius: 5px;
+
+    background: #b9692e;
+
+    color: #fff;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.login-button:hover {
+    background: #935126;
+}
+
+
+.login-alert {
+    margin-bottom: 20px;
+
+    padding: 12px 14px;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+}
+
+
+.login-error {
+    background: #f8d7da;
+    color: #842029;
+}
+
+
+.login-success {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+
+.login-footer {
+    margin-top: 30px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #d7c1af;
+
+    text-align: center;
+
+    color: #76523a;
+}
+
+
+.login-footer p {
+    margin: 0;
+
+    font-weight: bold;
+}
+
+
+.login-footer small {
+    font-size: 11px;
+}
+
+
+/* DASHBOARD e COMANDA - títulos e rodapés legíveis sobre o card marrom */
+.card-grafico .card-title,
+.card-comanda .card-title,
+.card-comanda .card-footer {
+    color: #f3e8dc;
+}
+
+
+/*
+======================================
+MODO ESCURO (botão de tema no topo)
+O AdminLTE coloca data-bs-theme="dark" no <html>;
+aqui só trocamos as variáveis do tema - os cards marrons continuam iguais.
+======================================
+*/
+[data-bs-theme="dark"] {
+    --cor-fundo-1: #1e1611;
+    --cor-texto: #f3e8dc;
+    --cor-subtitulo: #d4a276;
+}
+
+/* Títulos da página e breadcrumb (no claro usam o marrom escuro) */
+[data-bs-theme="dark"] main h1,
+[data-bs-theme="dark"] .breadcrumb a {
+    color: #f3e8dc;
+}
+
+/* Linhas das tabelas um pouco mais claras que o fundo */
+[data-bs-theme="dark"] td {
+    background-color: #2a1f18 !important;
+    border-color: #3d2e24;
+}
+
+/* Área de upload de imagem nos modais */
+[data-bs-theme="dark"] .banner-upload {
+    background-color: #2a1f18;
+}

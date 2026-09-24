@@ -8,7 +8,7 @@
                 Av Marechal Tito, 1500<br>
                 São Miguel Paulista
             </address>
-            <a href="{{ route('home') }}">Mapa</a>
+            <a href="{{ route('contato') }}#mapa">Mapa</a>
         </div>
 
         <div class="coluna-reserva">
@@ -37,18 +37,29 @@
                         <span>16:00 - 02:00</span>
                     </li>
                 </ul>
-                <a href="{{ route('home') }}" class="btn">Reserva</a>
+                <a href="{{ route('contato') }}#formulario" class="btn">Reserva</a>
             </div>
 
-            <div class="box-email">
+            <div class="box-email" id="newsletter">
                 <p>Informe seu email para receber as novidades e promoções da Casa do Barista</p>
-                <form action="{{ route('home') }}" method="post">
-                    <label for="email">Inscreva-se</label>
-                    <input type="email" name="email" id="email" placeholder="Informe seu email">
+
+                <form action="{{ route('newsletter.store') }}" method="post">
+                    @csrf
+                    <label for="email-newsletter">Inscreva-se</label>
+                    <input type="email" name="email" id="email-newsletter" placeholder="Informe seu email" maxlength="80" required>
                     <button type="submit" aria-label="Enviar">
                         <img src="{{ asset('barista/img/arrow.svg') }}" alt="Botão Enviar">
                     </button>
                 </form>
+
+                {{-- Retorno da inscrição (aparece no dashboard em "Newsletter") --}}
+                @if (session('newsletter_sucesso'))
+                    <p class="aviso-form aviso-sucesso" role="status">{{ session('newsletter_sucesso') }}</p>
+                @endif
+
+                @if (session('newsletter_erro'))
+                    <p class="aviso-form aviso-erro" role="alert">{{ session('newsletter_erro') }}</p>
+                @endif
             </div>
         </div>
 

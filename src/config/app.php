@@ -56,6 +56,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | URL de pedido (QR Code das mesas)
+    |--------------------------------------------------------------------------
+    |
+    | Endereço base gravado no QR Code de cada local. O código do local é
+    | adicionado no final: {APP_PEDIDO_URL}/{codigo_local}. Quando o app do
+    | cliente existir, basta apontar APP_PEDIDO_URL para ele no .env.
+    |
+    */
+
+    'pedido_url' => env('APP_PEDIDO_URL', env('APP_URL', 'http://localhost') . '/pedido'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |
@@ -65,7 +78,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // Horário de Brasília (pode trocar pelo .env em APP_TIMEZONE)
+    'timezone' => env('APP_TIMEZONE', 'America/Sao_Paulo'),
 
     /*
     |--------------------------------------------------------------------------
