@@ -28,7 +28,7 @@ services:
       MYSQL_USER: laravel
       MYSQL_PASSWORD: laravel
     ports:
-      - "${MYSQL_PORT:-3308}:3306"
+      - "${MYSQL_PORT:-3317}:3306"
     volumes:
       - mysql_data:/var/lib/mysql
   
@@ -37,7 +37,7 @@ services:
     container_name: casa-barista-phpmyadmin
     restart: always
     ports:
-      - "8081:80"
+      - "${PMA_PORT:-8082}:80"
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
