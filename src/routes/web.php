@@ -39,10 +39,17 @@ Route::get('/contato', [ContatoController::class, 'contato'])->name('contato');
 Route::post('/contato', [ContatoController::class, 'store'])->middleware('throttle:5,1,contato')->name('contato.store');
 Route::post('/newsletter', [SiteNewsletterController::class, 'store'])->middleware('throttle:5,1,newsletter')->name('newsletter.store');
 
+/*
+|--------------------------------------------------------------------------
+//                          Documentação da API 
+|--------------------------------------------------------------------------
+*/
+Route::view('/documentacao', 'api.documentacao')->name('api.documentacao');
+
 
 /*
 |--------------------------------------------------------------------------
-| LOGIN
+|                                 LOGIN
 |--------------------------------------------------------------------------
 |
 | O middleware guest permite acessar estas rotas somente quando o usuário NÃO está autenticado.
